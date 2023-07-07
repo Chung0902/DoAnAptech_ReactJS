@@ -32,7 +32,7 @@ const Login = () => {
                       <CInputGroupText>
                         <CIcon icon={cilUser} />
                       </CInputGroupText>
-                      <CFormInput placeholder="Username" autoComplete="username" />
+                      <CFormInput placeholder="Email" autoComplete="email" />
                     </CInputGroup>
                     <CInputGroup className="mb-4">
                       <CInputGroupText>
@@ -51,9 +51,11 @@ const Login = () => {
                         </CButton>
                       </CCol>
                       <CCol xs={6} className="text-right">
+                      <Link to="/forgot-password">
                         <CButton color="link" className="px-0">
                           Forgot password?
                         </CButton>
+                      </Link>
                       </CCol>
                     </CRow>
                   </CForm>
