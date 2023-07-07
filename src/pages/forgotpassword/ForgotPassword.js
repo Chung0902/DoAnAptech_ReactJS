@@ -14,7 +14,7 @@ import {
 import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
 
-const Register = () => {
+const ForgotPassword = () => {
   return (
     <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
       <CContainer>
@@ -23,29 +23,13 @@ const Register = () => {
             <CCard className="mx-4">
               <CCardBody className="p-4">
                 <CForm>
-                  <h1>Register</h1>
-                  <p className="text-medium-emphasis">Create your account</p>
-                  <CInputGroup className="mb-3">
-                    <CInputGroupText>
-                      <CIcon icon={cilUser} />
-                    </CInputGroupText>
-                    <CFormInput placeholder="Name" autoComplete="name" />
-                  </CInputGroup>
+                  <h1>RESET PASSWORD</h1>
                   <CInputGroup className="mb-3">
                     <CInputGroupText>@</CInputGroupText>
                     <CFormInput placeholder="Email" autoComplete="email" />
                   </CInputGroup>
+                 
                   <CInputGroup className="mb-3">
-                    <CInputGroupText>
-                      <CIcon icon={cilLockLocked} />
-                    </CInputGroupText>
-                    <CFormInput
-                      type="password"
-                      placeholder="Password"
-                      autoComplete="new-password"
-                    />
-                  </CInputGroup>
-                  <CInputGroup className="mb-4">
                     <CInputGroupText>
                       <CIcon icon={cilLockLocked} />
                     </CInputGroupText>
@@ -55,8 +39,19 @@ const Register = () => {
                       autoComplete="answer"
                     />
                   </CInputGroup>
+
+                  <CInputGroup className="mb-4">
+                    <CInputGroupText>
+                      <CIcon icon={cilLockLocked} />
+                    </CInputGroupText>
+                    <CFormInput
+                      type="password"
+                      placeholder="New-Password"
+                      autoComplete="new-password"
+                    />
+                  </CInputGroup>
                   <div className="d-grid">
-                    <CButton color="primary">Create Account</CButton>
+                    <CButton color="primary">RESET</CButton>
                   </div>
                 </CForm>
               </CCardBody>
@@ -68,4 +63,4 @@ const Register = () => {
   )
 }
 
-export default Register
+export default ForgotPassword
