@@ -15,6 +15,7 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
+import "../../styles/buttonlogin.css"
 
 const Login = () => {
   return (
@@ -46,7 +47,7 @@ const Login = () => {
                     </CInputGroup>
                     <CRow>
                       <CCol xs={6}>
-                        <CButton color="primary" className="px-4">
+                        <CButton color="primary" className="px-4 buttonlg">
                           Login
                         </CButton>
                       </CCol>
@@ -69,7 +70,7 @@ const Login = () => {
                     When logging into the system of a website or application, the user will need to provide login information to authenticate his/her identity and access the system's features and services.
                     </p>
                     <Link to="/register">
-                      <CButton color="primary" className="mt-3" active tabIndex={-1}>
+                      <CButton color="primary" className="mt-3 " active tabIndex={-1}>
                         Register Now!
                       </CButton>
                     </Link>
