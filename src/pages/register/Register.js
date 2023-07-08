@@ -13,6 +13,7 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
+import { FaQuestion } from "react-icons/fa";
 
 const Register = () => {
   return (
@@ -47,7 +48,7 @@ const Register = () => {
                   </CInputGroup>
                   <CInputGroup className="mb-4">
                     <CInputGroupText>
-                      <CIcon icon={cilLockLocked} />
+                      <FaQuestion/>
                     </CInputGroupText>
                     <CFormInput
                       type="answer"

@@ -13,6 +13,7 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
+import { FaQuestion } from "react-icons/fa";
 
 const ForgotPassword = () => {
   return (
@@ -31,7 +32,7 @@ const ForgotPassword = () => {
                  
                   <CInputGroup className="mb-3">
                     <CInputGroupText>
-                      <CIcon icon={cilLockLocked} />
+                      <FaQuestion/>
                     </CInputGroupText>
                     <CFormInput
                       type="answer"
