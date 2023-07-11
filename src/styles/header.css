@@ -20,7 +20,7 @@
 
 .menu {
     background-color: rgb(1, 57, 71);
-    padding: .3rem;
+    padding: .2rem;
     color: white;
     border: solid 1px black;
 }
@@ -68,6 +68,7 @@
     padding: 1rem;
     border-radius: 20px 0 0 20px;
     transition: 0.4s;
+    text-decoration: none;
 }
 
 .slidebar-menu li a span:first-child {
