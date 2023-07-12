@@ -1241,10 +1241,10 @@
   resolved "https://registry.yarnpkg.com/@coreui/icons/-/icons-3.0.1.tgz#a6b77a3d3578a59b08474fbfe29de0ebc5ea4c80"
   integrity sha512-u9UKEcRMyY9pa4jUoLij8pAR03g5g6TLWV33/Mx2ix8sffyi0eO4fLV8DSTQljDCw938zt7KYog5cVKEAJUxxg==
 
-"@coreui/react@^4.8.0":
-  version "4.8.0"
-  resolved "https://registry.yarnpkg.com/@coreui/react/-/react-4.8.0.tgz#fc6ee459cb51f44d2720d93e4dd9fae32662eba4"
-  integrity sha512-KK5KOu4325wqorprWMxfLWOQy4OGOo2jWDeua6WmCA97W1JApEpJ6dlqGQ/+y088rFVk8CCzUdY1vF+/yyc51w==
+"@coreui/react@^5.0.0-alpha.0":
+  version "5.0.0-alpha.0"
+  resolved "https://registry.yarnpkg.com/@coreui/react/-/react-5.0.0-alpha.0.tgz#6de10fa28a54b7ac0e3c08e952ab392eba6300d7"
+  integrity sha512-fJNxmdz9ohbtlZw4dnlHtEflGBCrobqWf2cgdCLzidapbsyCHwoKgANVv3Ghi4ZkynrQWLbDTLXULVNgKuJ+Cw==
 
 "@csstools/normalize.css@*":
   version "12.0.0"
