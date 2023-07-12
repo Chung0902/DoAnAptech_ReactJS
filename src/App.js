@@ -1,12 +1,12 @@
 import logo from "./logo.svg";
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Login from "./pages/login/Login";
-import Register from "./pages/register/Register";
 import "./scss/style.scss";
-import ForgotPassword from "./pages/forgotpassword/ForgotPassword";
 import Layout from "./components/Main/Layout";
 import AllDashboard from "./pages/owner/AllDashboard";
+import Login from "./pages/Auth/Login";
+import Register from "./pages/Auth/Register";
+import ForgotPassword from "./pages/Auth/ForgotPassword";
 
 function App() {
   return (
