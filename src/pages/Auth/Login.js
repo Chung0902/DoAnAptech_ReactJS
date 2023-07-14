@@ -1,5 +1,8 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import {useNavigate, useLocation} from 'react-router-dom';
+import axiosClient from '../../libraries/axiosClient';
+// import toast from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 import {
   CButton,
   CCard,
@@ -17,7 +20,35 @@ import CIcon from "@coreui/icons-react";
 import { cilLockLocked, cilUser } from "@coreui/icons";
 import "../../styles/buttonlogin.css";
 
+
+
 const Login = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  
+  const navigate = useNavigate("")
+  const location = useLocation()
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axiosClient.post('/admin/employees/login', {
+        email,
+        password,
+      });
+      if (response && response.data && response.data.success) {
+        localStorage.setItem('auth', JSON.stringify(response.data));
+        navigate(location.state ||"/main");
+      } else {
+        alert(response?.data?.message);
+      }
+    } catch (error) {
+      console.error(error);
+      console.log(error.response.data);
+      alert('Something went wrong');
+    }
+  };
+
   return (
     <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
       <CContainer>
@@ -26,7 +57,7 @@ const Login = () => {
             <CCardGroup>
               <CCard className="p-4">
                 <CCardBody>
-                  <CForm>
+                  <CForm onSubmit={handleSubmit}>
                     <h1>Login</h1>
                     <p className="text-medium-emphasis">
                       Sign In to your account
@@ -35,13 +66,19 @@ const Login = () => {
                       <CInputGroupText>
                         <CIcon icon={cilUser} />
                       </CInputGroupText>
-                      <CFormInput placeholder="Email" autoComplete="email" />
+                      <CFormInput
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)} 
+                        placeholder="Email" 
+                        autoComplete="email" />
                     </CInputGroup>
                     <CInputGroup className="mb-4">
                       <CInputGroupText>
                         <CIcon icon={cilLockLocked} />
                       </CInputGroupText>
                       <CFormInput
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                         type="password"
                         placeholder="Password"
                         autoComplete="current-password"
@@ -49,7 +86,7 @@ const Login = () => {
                     </CInputGroup>
                     <CRow>
                       <CCol xs={6}>
-                        <CButton className="px-4 buttonlg">Login</CButton>
+                        <CButton type="submit" className="px-4 buttonlg">Login</CButton>
                       </CCol>
                       <CCol xs={6} className="text-right">
                         <Link to="/forgot-password">
