@@ -30,8 +30,8 @@ const Layout = () => {
                   Admin
                 </button>
                 <ul className="dropdown-menu">
-                  <li><a className="dropdown-item" href="#">Profile</a></li>
-                  <li><a className="dropdown-item" href="#">Another action</a></li>
+                  <li><Link className="dropdown-item" to="#">Profile</Link></li>
+                  <li><Link className="dropdown-item" to="#">Another action</Link></li>
                   <li><hr className="dropdown-divider" /></li>
                   <li><Link className="dropdown-item" to="/login">Logout</Link></li>
                 </ul>

@@ -37,15 +37,21 @@ const Login = () => {
         email,
         password,
       });
-      if (response && response.data && response.data.success) {
-        localStorage.setItem('auth', JSON.stringify(response.data));
+      // if (response && response.data && response.data.success) {
+      //   console.log(response.data.success)
+      //   localStorage.setItem('autho', JSON.stringify(response.data));
+      //   navigate(location.state?.from ||'/main');
+      // } else {
+      //   alert(response?.data?.message);
+      // }
+      // Save the access token and refresh token to local storage
+      if (response.token && response.refreshToken) {
+        window.localStorage.setItem('TOKEN', response.token);
+        window.localStorage.setItem('REFRESH_TOKEN', response.refreshToken);
         navigate(location.state?.from ||'/main');
-      } else {
-        alert(response?.data?.message);
       }
     } catch (error) {
       console.error(error);
-      console.log(error.response.data);
       alert('Something went wrong');
     }
   };
