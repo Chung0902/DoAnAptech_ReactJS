@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import {useNavigate, useLocation} from 'react-router-dom';
-import axiosClient from '../../libraries/axiosClient';
+
 // import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import {
@@ -19,6 +19,7 @@ import {
 import CIcon from "@coreui/icons-react";
 import { cilLockLocked, cilUser } from "@coreui/icons";
 import "../../styles/buttonlogin.css";
+import axiosClient from "../../libraries/axiosClient";
 
 
 
@@ -32,13 +33,13 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axiosClient.post('/admin/employees/login', {
+      const response = await axiosClient.post('admin/employees/login', {
         email,
         password,
       });
       if (response && response.data && response.data.success) {
         localStorage.setItem('auth', JSON.stringify(response.data));
-        navigate(location.state ||"/main");
+        navigate(location.state?.from ||'/main');
       } else {
         alert(response?.data?.message);
       }
