@@ -1,9 +1,9 @@
 import React from "react";
 
-import { Outlet,Link,NavLink } from 'react-router-dom';
+import { Outlet,Link, } from 'react-router-dom';
 
 import "../../styles/header.css";
-import Header from './../owner/Header/index';
+//import Header from './../owner/Header/index';
 import HeaderEm from "../employee/HeaderEm";
 
 const Layout = () => {
