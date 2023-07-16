@@ -3,17 +3,20 @@ import React from "react";
 import { Outlet,Link, } from 'react-router-dom';
 
 import "../../styles/header.css";
-//import Header from './../owner/Header/index';
+import Header from './../owner/Header/index';
 import HeaderEm from "../employee/HeaderEm";
+import { useAuth } from "../../context/auth";
 
 const Layout = () => {
+  const [auth, setAuth] = useAuth();
   return (
     <>
       <div>
         <input type="checkbox" id="nav-toggle" />
         <div className="slidebar">
+        {auth && auth.user && auth.user.role === 1 ? <Header /> : <HeaderEm/>}
           {/* <Header /> */}
-          <HeaderEm/>
+          
         </div>
         <div className="main-content">
           <header>

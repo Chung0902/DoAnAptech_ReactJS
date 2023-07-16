@@ -20,13 +20,14 @@ import CIcon from "@coreui/icons-react";
 import { cilLockLocked, cilUser } from "@coreui/icons";
 import "../../styles/buttonlogin.css";
 import axiosClient from "../../libraries/axiosClient";
+import { useAuth } from "../../context/auth";
 
 
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  
+  const [auth, setAuth] = useAuth();
   const navigate = useNavigate("")
   const location = useLocation()
 
@@ -37,17 +38,22 @@ const Login = () => {
         email,
         password,
       });
-      // if (response && response.data && response.data.success) {
-      //   console.log(response.data.success)
-      //   localStorage.setItem('autho', JSON.stringify(response.data));
-      //   navigate(location.state?.from ||'/main');
-      // } else {
-      //   alert(response?.data?.message);
-      // }
-      // Save the access token and refresh token to local storage
       if (response.token && response.refreshToken) {
-        window.localStorage.setItem('TOKEN', response.token);
-        window.localStorage.setItem('REFRESH_TOKEN', response.refreshToken);
+        // window.localStorage.setItem('TOKEN', response.token);
+        // window.localStorage.setItem('REFRESH_TOKEN', response.refreshToken);
+        
+          // Set user info and token in AuthContext
+          setAuth({
+            user: response.user,
+            token: response.token,
+          });
+  
+          // Save user info and token in localStorage
+          localStorage.setItem('auth', JSON.stringify({
+            user: response.user,
+            token: response.token,
+          }));
+  
         navigate(location.state?.from ||'/main');
       }
     } catch (error) {
@@ -57,7 +63,7 @@ const Login = () => {
   };
 
   return (
-    <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
+  <div className="tab-content min-vh-100 d-flex flex-row align-items-center">
       <CContainer>
         <CRow className="justify-content-center">
           <CCol md={8}>
