@@ -3,10 +3,10 @@ import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./scss/style.scss";
 import Layout from "./components/Main/Layout";
-import AllDashboard from "./pages/owner/AllDashboard";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
 import ForgotPassword from "./pages/Auth/ForgotPassword";
+import MainDashboardAdmin from "./pages/owner/MainDashboardAdmin";
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/main" element={<Layout />}>
-          <Route path="/main/amindashboard" element={<AllDashboard />} />
+          <Route path="/main/amindashboard" element={<MainDashboardAdmin/>} />
         </Route>
 
         <Route path="/login" element={<Login />} />
