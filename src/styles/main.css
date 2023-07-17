@@ -676,7 +676,7 @@ fieldset:disabled a.btn {
 }
 
 /* CSS updateEmployee */
-.modal-dialog {
+/* .modal-dialog {
   position: relative;
   width: auto;
   margin: 0.5rem;
@@ -701,13 +701,13 @@ fieldset:disabled a.btn {
     transition: none;
   }
 }
-
+/* 
 .modal.show .modal-dialog {
   -webkit-transform: translate(0, 0);
       -ms-transform: translate(0, 0);
           transform: translate(0, 0);
-}
-
+} */
+/* 
 .modal-dialog-centered {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -716,8 +716,8 @@ fieldset:disabled a.btn {
       -ms-flex-align: center;
           align-items: center;
   min-height: calc(100% - (0.5rem * 2));
-}
-
+} */
+/* 
 .modal-content {
   position: relative;
   display: -webkit-box;
@@ -734,8 +734,8 @@ fieldset:disabled a.btn {
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 0.3rem;
   outline: 0;
-}
-
+} */
+/* 
 .modal-backdrop {
   position: fixed;
   top: 0;
@@ -752,7 +752,7 @@ fieldset:disabled a.btn {
 
 .modal-backdrop.show {
   opacity: 0.5;
-}
+}  */
 
 
 
