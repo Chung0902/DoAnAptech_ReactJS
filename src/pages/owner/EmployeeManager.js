@@ -100,18 +100,7 @@ const EmployeeManager = () => {
                         onclick="myFunction(this)"
                       >
                         <i className="fas fa-trash-alt"></i>
-                      </button>
-                      <button
-                        className="btn btn-primary btn-sm edit"
-                        type="button"
-                        title="Sửa"
-                        id="show-emp"
-                        data-toggle="modal"
-                        data-target="#ModalUP"
-                      >
-                        <i className="fas fa-edit"></i>
-                      </button>
-                      
+                      </button>               
                         <button
                           type="button"
                           className="btn btn-primary"
@@ -119,79 +108,9 @@ const EmployeeManager = () => {
                           data-bs-target="#exampleModal"
                           data-bs-whatever="@mdo"
                         >
-                          Open modal for @mdo
+                          <i className="fas fa-edit"></i>
                         </button>
-                        <div
-                          className="modal fade"
-                          id="exampleModal"
-                          tabIndex={-1}
-                          aria-labelledby="exampleModalLabel"
-                          aria-hidden="true"
-                        >
-                          <div className="modal-dialog">
-                            <div className="modal-content">
-                              <div className="modal-header">
-                                <h1
-                                  className="modal-title fs-5"
-                                  id="exampleModalLabel"
-                                >
-                                  New message
-                                </h1>
-                                <button
-                                  type="button"
-                                  className="btn-close"
-                                  data-bs-dismiss="modal"
-                                  aria-label="Close"
-                                />
-                              </div>
-                              <div className="modal-body">
-                                <form>
-                                  <div className="mb-3">
-                                    <label
-                                      htmlFor="recipient-name"
-                                      className="col-form-label"
-                                    >
-                                      Recipient:
-                                    </label>
-                                    <input
-                                      type="text"
-                                      className="form-control"
-                                      id="recipient-name"
-                                    />
-                                  </div>
-                                  <div className="mb-3">
-                                    <label
-                                      htmlFor="message-text"
-                                      className="col-form-label"
-                                    >
-                                      Message:
-                                    </label>
-                                    <textarea
-                                      className="form-control"
-                                      id="message-text"
-                                      defaultValue={""}
-                                    />
-                                  </div>
-                                </form>
-                              </div>
-                              <div className="modal-footer">
-                                <button
-                                  type="button"
-                                  className="btn btn-secondary"
-                                  data-bs-dismiss="modal"
-                                >
-                                  Close
-                                </button>
-                                <button
-                                  type="button"
-                                  className="btn btn-primary"
-                                >
-                                  Send message
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+                        <UpdateEmployee/>
                 
                     </td>
                   </tr>
@@ -213,7 +132,7 @@ const EmployeeManager = () => {
                     <td>Nữ</td>
                     <td>0931342432</td>
                     <td>Bán hàng</td>
-                    <td>
+                    <td className="table-td-center">
                       <button
                         className="btn btn-primary btn-sm trash"
                         type="button"
@@ -221,17 +140,18 @@ const EmployeeManager = () => {
                         onclick="myFunction(this)"
                       >
                         <i className="fas fa-trash-alt"></i>
-                      </button>
-                      <button
-                        className="btn btn-primary btn-sm edit"
-                        type="button"
-                        title="Sửa"
-                        id="show-emp"
-                        data-toggle="modal"
-                        data-target="#ModalUP"
-                      >
-                        <i className="fas fa-edit"></i>
-                      </button>
+                      </button>               
+                        <button
+                          type="button"
+                          className="btn btn-primary"
+                          data-bs-toggle="modal"
+                          data-bs-target="#exampleModal"
+                          data-bs-whatever="@mdo"
+                        >
+                          <i className="fas fa-edit"></i>
+                        </button>
+                        <UpdateEmployee/>
+                
                     </td>
                   </tr>
                   <tr>
@@ -252,25 +172,26 @@ const EmployeeManager = () => {
                     <td>Nữ</td>
                     <td>0931491997</td>
                     <td>Thu ngân</td>
-                    <td>
+                    <td className="table-td-center">
                       <button
                         className="btn btn-primary btn-sm trash"
                         type="button"
                         title="Xóa"
-                        onclick="myFunction()"
+                        onclick="myFunction(this)"
                       >
                         <i className="fas fa-trash-alt"></i>
-                      </button>
-                      <button
-                        className="btn btn-primary btn-sm edit"
-                        type="button"
-                        title="Sửa"
-                        id="show-emp"
-                        data-toggle="modal"
-                        data-target="#ModalUP"
-                      >
-                        <i className="fas fa-edit"></i>
-                      </button>
+                      </button>               
+                        <button
+                          type="button"
+                          className="btn btn-primary"
+                          data-bs-toggle="modal"
+                          data-bs-target="#exampleModal"
+                          data-bs-whatever="@mdo"
+                        >
+                          <i className="fas fa-edit"></i>
+                        </button>
+                        <UpdateEmployee/>
+                
                     </td>
                   </tr>
                   <tr>
@@ -293,25 +214,26 @@ const EmployeeManager = () => {
                     <td>Nam</td>
                     <td>0916706633</td>
                     <td>Tư vấn</td>
-                    <td>
+                    <td className="table-td-center">
                       <button
                         className="btn btn-primary btn-sm trash"
                         type="button"
                         title="Xóa"
-                        onclick="myFunction()"
+                        onclick="myFunction(this)"
                       >
                         <i className="fas fa-trash-alt"></i>
-                      </button>
-                      <button
-                        className="btn btn-primary btn-sm edit"
-                        type="button"
-                        title="Sửa"
-                        id="show-emp"
-                        data-toggle="modal"
-                        data-target="#ModalUP"
-                      >
-                        <i className="fas fa-edit"></i>
-                      </button>
+                      </button>               
+                        <button
+                          type="button"
+                          className="btn btn-primary"
+                          data-bs-toggle="modal"
+                          data-bs-target="#exampleModal"
+                          data-bs-whatever="@mdo"
+                        >
+                          <i className="fas fa-edit"></i>
+                        </button>
+                        <UpdateEmployee/>
+                
                     </td>
                   </tr>
                   <tr>
@@ -332,25 +254,26 @@ const EmployeeManager = () => {
                     <td>Nam</td>
                     <td>0971038066</td>
                     <td>Bảo trì</td>
-                    <td>
+                    <td className="table-td-center">
                       <button
                         className="btn btn-primary btn-sm trash"
                         type="button"
                         title="Xóa"
-                        onclick="myFunction()"
+                        onclick="myFunction(this)"
                       >
                         <i className="fas fa-trash-alt"></i>
-                      </button>
-                      <button
-                        className="btn btn-primary btn-sm edit"
-                        type="button"
-                        title="Sửa"
-                        id="show-emp"
-                        data-toggle="modal"
-                        data-target="#ModalUP"
-                      >
-                        <i className="fas fa-edit"></i>
-                      </button>
+                      </button>               
+                        <button
+                          type="button"
+                          className="btn btn-primary"
+                          data-bs-toggle="modal"
+                          data-bs-target="#exampleModal"
+                          data-bs-whatever="@mdo"
+                        >
+                          <i className="fas fa-edit"></i>
+                        </button>
+                        <UpdateEmployee/>
+                
                     </td>
                   </tr>
                   <tr>
@@ -371,25 +294,26 @@ const EmployeeManager = () => {
                     <td>Nam</td>
                     <td>0846881155</td>
                     <td>Dịch vụ</td>
-                    <td>
+                    <td className="table-td-center">
                       <button
                         className="btn btn-primary btn-sm trash"
                         type="button"
                         title="Xóa"
-                        onclick="myFunction()"
+                        onclick="myFunction(this)"
                       >
                         <i className="fas fa-trash-alt"></i>
-                      </button>
-                      <button
-                        className="btn btn-primary btn-sm edit"
-                        type="button"
-                        title="Sửa"
-                        id="show-emp"
-                        data-toggle="modal"
-                        data-target="#ModalUP"
-                      >
-                        <i className="fas fa-edit"></i>
-                      </button>
+                      </button>               
+                        <button
+                          type="button"
+                          className="btn btn-primary"
+                          data-bs-toggle="modal"
+                          data-bs-target="#exampleModal"
+                          data-bs-whatever="@mdo"
+                        >
+                          <i className="fas fa-edit"></i>
+                        </button>
+                        <UpdateEmployee/>
+                
                     </td>
                   </tr>
                   <tr>
@@ -410,22 +334,26 @@ const EmployeeManager = () => {
                     <td>Nữ </td>
                     <td>0836333037</td>
                     <td>Tư vấn</td>
-                    <td>
+                    <td className="table-td-center">
                       <button
                         className="btn btn-primary btn-sm trash"
+                        type="button"
                         title="Xóa"
+                        onclick="myFunction(this)"
                       >
                         <i className="fas fa-trash-alt"></i>
-                      </button>
-                      <button
-                        className="btn btn-primary btn-sm edit"
-                        title="Sửa"
-                        id="show-emp"
-                        data-toggle="modal"
-                        data-target="#ModalUP"
-                      >
-                        <i className="fas fa-edit"></i>
-                      </button>
+                      </button>               
+                        <button
+                          type="button"
+                          className="btn btn-primary"
+                          data-bs-toggle="modal"
+                          data-bs-target="#exampleModal"
+                          data-bs-whatever="@mdo"
+                        >
+                          <i className="fas fa-edit"></i>
+                        </button>
+                        <UpdateEmployee/>
+                
                     </td>
                   </tr>
                 </tbody>
