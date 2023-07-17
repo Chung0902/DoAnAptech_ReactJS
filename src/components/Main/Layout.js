@@ -20,13 +20,13 @@ const Layout = () => {
         </div>
         <div className="main-content">
           <header>
-            <h2>
+            <h4>
               {/* edit nav-toggle */}
               <label htmlFor="nav-toggle">
                 <span className="las la-bars nav" />
               </label>{" "}
               Dashboard
-            </h2>
+            </h4>
             <div className="user-wrapper">
               <div className="btn-group">
                 <button type="button" className="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">

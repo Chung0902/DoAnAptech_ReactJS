@@ -22,32 +22,31 @@ const Header = () => {
                 <b>Product Management</b>
               </li>
               <li>
-                <a href="/TotalEaring.html">
+                <NavLink to="/main/categoriesmanager" className="active1">
                   <span className="fa-solid fa-lines-leaning" />
-                  <span>Create Categories</span>
-                </a>
+                  <span>Categories</span>
+                </NavLink>
               </li>
               <li>
-                <a href="/VacationDays.html">
-                <span className="fa-solid fa-file-circle-plus" />
-
-                  <span>Create Products</span>
-                </a>
+                <NavLink to="/main/productsmanager" className="active1">
+                  <span className="fa-solid fa-file-circle-plus" />
+                  <span>Products</span>
+                </NavLink>
               </li>
               <li>
                 <a href="/BenefitsPaid.html">
                   <span className="fa-solid fa-gears" />
-                  <span>Products</span>
+                  <span>Sales report</span>
                 </a>
               </li>
               <li className="menu">
                 <b>NOTIFICATION</b>
               </li>
               <li>
-                <a href="/HiringAnniversary.html">
+                <NavLink to="/main/customermanagement" className="active1">
                   <span className="fa-solid fa-users" />
                   <span>Customers</span>
-                </a>
+                </NavLink>
               </li>
               <li>
                 <NavLink to="/main/employeemanager" className="active1">

@@ -9,6 +9,11 @@ import ForgotPassword from "./pages/Auth/ForgotPassword";
 import MainDashboardAdmin from "./pages/owner/MainDashboardAdmin";
 import EmployeeManager from "./pages/owner/EmployeeManager";
 import AddEmployee from "./pages/owner/employees/AddEmployee";
+import CustomerManagement from "./pages/owner/CustomerManagement";
+import AddCustomer from './pages/owner/customer/AddCustomer';
+import CategoriesManager from "./pages/owner/CategoriesManager";
+import ProductsManager from "./pages/owner/ProductsManager";
+import AddProduct from "./pages/owner/products/AddProduct";
 
 
 function App() {
@@ -20,6 +25,11 @@ function App() {
           <Route path="/main/amindashboard" element={<MainDashboardAdmin/>} />
           <Route path="/main/employeemanager" element={<EmployeeManager/>} />
           <Route path="/main/employeemanager/addemployee" element={<AddEmployee/>} />
+          <Route path="/main/customermanagement" element={<CustomerManagement/>} />
+          <Route path="/main/customermanagement/addcustomer" element={<AddCustomer/>} />
+          <Route path="/main/categoriesmanager" element={<CategoriesManager/>} />
+          <Route path="/main/productsmanager" element={<ProductsManager/>} />
+          <Route path="/main/productsmanager/addproducts" element={<AddProduct/>} />
         </Route>
 
         <Route path="/login" element={<Login />} />

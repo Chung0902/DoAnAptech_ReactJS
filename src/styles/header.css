@@ -23,6 +23,7 @@
     padding: .2rem;
     color: white;
     border: solid 1px black;
+    margin: 5px 0;
 }
 
 .slidebar {
@@ -58,6 +59,7 @@
 .slidebar-menu li {
     width: 100%;
     padding-left: 1rem;
+    margin-top: -5px;
 }
 
 .slidebar-menu li a {
@@ -162,6 +164,9 @@ header label span {
     cursor: pointer;
     font-size: 1.7rem;
     padding-right: 1rem;
+}
+.logo{
+    font-size: 25px;
 }
 
 .user-wrapper {
