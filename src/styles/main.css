@@ -17,6 +17,12 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 0.5rem;
 }
 
+h5, .h5 {
+  font-size: 20px;
+  color: #000;
+  font-weight: bold;
+}
+
 p {
   margin-top: 0;
   margin-bottom: 1rem;
@@ -400,7 +406,7 @@ th {
 
 .widget-small .info p {
   margin: 0;
-  font-size: 16px;
+  font-size: 13px;
 }
 
 .widget-small.primary {
@@ -554,7 +560,8 @@ th {
 }
 .control-label{
   font-weight: bold;
-  font-size: 13px;
+  font-size: 15px;
+  color: #000;
 }
 .form-inline .form-group {
   display: -webkit-box;
@@ -642,23 +649,23 @@ fieldset:disabled a.btn {
 
 
 .btn-save{
-  background-color: rgb(166 236 171);
-  color: rgb(1 123 10);
+  background-color: #0ba1ec;
+  color: white;
   /* width: 100px; */
   font-weight: bold;
   letter-spacing: 1px;
 }
 .btn-cancel{
-  background-color: rgb(255 197 197);
-  color: rgb(190, 40, 40);
+  background-color: red;
+  color: white;
   /* width: 100px; */
   font-weight: bold;
   letter-spacing: 1px;
   margin-left: 10px;
 }
 .btn-add{
-  background: #9df99d !important;
-  color: #003c00 !important;
+  background: #0ba1ec!important;
+  color: white !important;
 }
 .btn-sm, .btn-group-sm > .btn {
   padding: 5px;
@@ -670,9 +677,12 @@ fieldset:disabled a.btn {
   font-weight: 500;
 }
 .btn-delete{
-  background: #d0d0d0;
-  color: #f99a9a;
+  background: rgb(218, 51, 51);
+  color: white;
   margin-left: 5px;
+}
+.adulc{
+  padding-left: 20px;
 }
 
 

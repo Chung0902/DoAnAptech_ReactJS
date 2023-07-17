@@ -1,6 +1,6 @@
 import React from "react";
 
-const UpdateEmployee = () => {
+const UpdateCustomer = () => {
   return (
     <div>
       <div
@@ -16,13 +16,13 @@ const UpdateEmployee = () => {
               <div class="row">
                 <div class="form-group  col-md-12">
                   <span class="thong-tin-thanh-toan">
-                    <h5>Chỉnh sửa thông tin nhân viên cơ bản</h5>
+                    <h5>Chỉnh sửa thông tin khách hàng cơ bản</h5>
                   </span>
                 </div>
               </div>
               <div class="row">
                 <div class="form-group col-md-6">
-                  <label class="control-label">ID nhân viên</label>
+                  <label class="control-label">ID khách hàng</label>
                   <input
                     class="form-control"
                     type="text"
@@ -37,7 +37,7 @@ const UpdateEmployee = () => {
                     class="form-control"
                     type="text"
                     required
-                    value="Võ Trường"
+                    value="Nguyễn Thị Chung"
                   />
                 </div>
                 <div class="form-group  col-md-6">
@@ -55,28 +55,12 @@ const UpdateEmployee = () => {
                     class="form-control"
                     type="text"
                     required
-                    value="truong.vd2000@gmail.com"
+                    value="chung@gmail.com"
                   />
                 </div>
                 <div class="form-group col-md-6">
                   <label class="control-label">Ngày sinh</label>
-                  <input class="form-control" type="date" value="15/03/2000" />
-                </div>
-                <div class="form-group  col-md-6">
-                  <label for="exampleSelect1" class="control-label">
-                    Chức vụ
-                  </label>
-                  <select class="form-control" id="exampleSelect1">
-                    <option>Bán hàng</option>
-                    <option>Tư vấn</option>
-                    <option>Dịch vụ</option>
-                    <option>Thu Ngân</option>
-                    <option>Quản kho</option>
-                    <option>Bảo trì</option>
-                    <option>Kiểm hàng</option>
-                    <option>Bảo vệ</option>
-                    <option>Tạp vụ</option>
-                  </select>
+                  <input class="form-control" type="date" value="13/09/2002" />
                 </div>
               </div>
             </div>
@@ -99,4 +83,4 @@ const UpdateEmployee = () => {
   );
 };
 
-export default UpdateEmployee;
+export default UpdateCustomer;

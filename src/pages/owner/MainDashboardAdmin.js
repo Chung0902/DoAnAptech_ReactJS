@@ -6,8 +6,8 @@ import {
   FaShoppingBag,
   FaBandcamp,
 } from "react-icons/fa";
-import BarChart from "./BarChart";
-import PolarAreaChart from "./PolarAreaChart";
+import BarChart from "./dashboard/BarChart";
+import PolarAreaChart from "./dashboard/PolarAreaChart";
 
 const MainDashboardAdmin = () => {
   return (
