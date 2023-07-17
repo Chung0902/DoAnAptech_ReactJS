@@ -14,6 +14,8 @@ import AddCustomer from './pages/owner/customer/AddCustomer';
 import CategoriesManager from "./pages/owner/CategoriesManager";
 import ProductsManager from "./pages/owner/ProductsManager";
 import AddProduct from "./pages/owner/products/AddProduct";
+import OrderManagement from "./pages/owner/OrderManagement";
+import AddOrders from "./pages/owner/orders/AddOrders";
 
 
 function App() {
@@ -30,6 +32,8 @@ function App() {
           <Route path="/main/categoriesmanager" element={<CategoriesManager/>} />
           <Route path="/main/productsmanager" element={<ProductsManager/>} />
           <Route path="/main/productsmanager/addproducts" element={<AddProduct/>} />
+          <Route path="/main/ordermanagement" element={<OrderManagement/>} />
+          <Route path="/main/ordermanagement/addorders" element={<AddOrders/>} />
         </Route>
 
         <Route path="/login" element={<Login />} />
