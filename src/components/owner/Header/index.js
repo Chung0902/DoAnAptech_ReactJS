@@ -50,10 +50,10 @@ const Header = () => {
                 </a>
               </li>
               <li>
-                <a href="/AccumulatedVacation.html">
+                <NavLink to="/main/employeemanager" className="active1">
                   <span className="fa-solid fa-address-book" />
                   <span>Employees</span>
-                </a>
+                </NavLink>
               </li>
               <li>
                 <a href="/ChangeBenefitsPlan.html">
