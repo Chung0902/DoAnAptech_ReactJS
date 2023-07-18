@@ -53,7 +53,7 @@ const Login = () => {
             user: response.user,
             token: response.token,
           }));
-  
+          alert('login success!')
         navigate(location.state?.from ||'/main');
       }
     } catch (error) {
