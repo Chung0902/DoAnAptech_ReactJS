@@ -641,8 +641,8 @@ fieldset:disabled a.btn {
 }
 
 .btn-primary {
-  color: rgb(245 157 57);
-  background-color: rgb(251 226 197);
+  color: rgb(255, 255, 255);
+  background-color: rgb(43, 163, 255);
   border-color: none;
   /* border-top-left-radius: 10px !important; */
   /* border-bottom-right-radius: 10px !important; */
