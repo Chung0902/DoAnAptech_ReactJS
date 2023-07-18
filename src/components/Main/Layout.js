@@ -30,7 +30,7 @@ const Layout = () => {
             <div className="user-wrapper">
               <div className="btn-group">
                 <button type="button" className="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                  Admin
+                  {auth?.user?.firstName} {auth?.user?.lastName}
                 </button>
                 <ul className="dropdown-menu">
                   <li><Link className="dropdown-item" to="#">Profile</Link></li>
