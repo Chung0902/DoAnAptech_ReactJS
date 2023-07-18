@@ -71,7 +71,7 @@ const Login = () => {
               <CCard className="p-4 pt-5 pb-5 shadow">
                 <CCardBody>
                   <CForm onSubmit={handleSubmit}>
-                    <h1>Login</h1>
+                    <h1 className="text-center text-primary">Login</h1>
                     <p className="text-medium-emphasis">
                       Sign In to your account
                     </p>

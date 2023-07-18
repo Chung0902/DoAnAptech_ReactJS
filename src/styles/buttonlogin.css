@@ -35,8 +35,19 @@
     background-repeat: no-repeat;
 
 }
+.bg-forgot{
+    background-image: url(https://img5.thuthuatphanmem.vn/uploads/2021/11/22/hinh-nen-mau-xanh-ngoc-cho-laptop_100603365.jpg) !important;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+}
 .card1{
     
     background-color: rgba(3, 34, 106, 0.664);
+
+}
+.card2{
+    
+    background-color: rgba(182, 255, 242, 0.63);
 
 }

@@ -49,14 +49,14 @@ const ForgotPassword = () => {
       
   }
   return (
-    <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
+    <div className="bg-forgot min-vh-100 d-flex flex-row align-items-center">
       <CContainer>
         <CRow className="justify-content-center">
           <CCol md={9} lg={7} xl={6}>
-            <CCard className="mx-4">
+            <CCard className="mx-4 shadow card2 p-5">
               <CCardBody className="p-4">
                 <CForm onSubmit={handleSubmit}>
-                  <h1>RESET PASSWORD</h1>
+                  <h1 className='text-center text-white mb-3'>RESET PASSWORD</h1>
                   <CInputGroup className="mb-3">
                     <CInputGroupText>@</CInputGroupText>
                     <CFormInput placeholder="Email" autoComplete="email"  value={email}
