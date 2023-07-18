@@ -29,3 +29,14 @@
      box-shadow: 0 0 0 0 rgb(218 103 68 / 0%);
     }
    }
+.bg-login{
+    background-image: url(https://png.pngtree.com/thumb_back/fw800/background/20190826/pngtree-water-dynamic-white-blue-background-image_299695.jpg) !important;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+}
+.card1{
+    
+    background-color: rgba(3, 34, 106, 0.664);
+
+}

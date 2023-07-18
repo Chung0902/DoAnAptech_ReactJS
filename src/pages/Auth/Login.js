@@ -63,12 +63,12 @@ const Login = () => {
   };
 
   return (
-  <div className="tab-content min-vh-100 d-flex flex-row align-items-center">
+  <div className="bg-login min-vh-100 d-flex flex-row align-items-center">
       <CContainer>
-        <CRow className="justify-content-center">
+        <CRow className="justify-content-center ">
           <CCol md={8}>
-            <CCardGroup>
-              <CCard className="p-4">
+            <CCardGroup className="shadow pt-5 ">
+              <CCard className="p-4 pt-5 pb-5 shadow">
                 <CCardBody>
                   <CForm onSubmit={handleSubmit}>
                     <h1>Login</h1>
@@ -113,7 +113,7 @@ const Login = () => {
                 </CCardBody>
               </CCard>
               <CCard
-                className="text-white bg-primary py-5"
+                className="text-white py-5 shadow card1 pt-5 pb-5"
                 style={{ width: "44%" }}
               >
                 <CCardBody className="text-center">
