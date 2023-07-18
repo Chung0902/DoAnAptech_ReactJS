@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import BrowsOrder from "./orders/BrowsOrder";
 
 const OrderManagement = () => {
   return (
@@ -87,9 +88,13 @@ const OrderManagement = () => {
                       <button
                         className="btn btn-primary btn-sm edit"
                         type="button"
-                        title="Sửa"
+                        title="Duyệt"
+                        id="show-emp"
+                        data-bs-toggle="modal"
+                        data-bs-target="#ModalUP"
                       >
-                        <i className="fa fa-edit"></i>
+                        <i className="fas fa-edit"></i>
+                        <BrowsOrder/>
                       </button>
                     </td>
                   </tr>
@@ -116,9 +121,13 @@ const OrderManagement = () => {
                       <button
                         className="btn btn-primary btn-sm edit"
                         type="button"
-                        title="Sửa"
+                        title="Duyệt"
+                        id="show-emp"
+                        data-bs-toggle="modal"
+                        data-bs-target="#ModalUP"
                       >
-                        <i className="fa fa-edit"></i>
+                        <i className="fas fa-edit"></i>
+                        <BrowsOrder/>
                       </button>
                     </td>
                   </tr>
@@ -148,9 +157,13 @@ const OrderManagement = () => {
                       <button
                         className="btn btn-primary btn-sm edit"
                         type="button"
-                        title="Sửa"
+                        title="Duyệt"
+                        id="show-emp"
+                        data-bs-toggle="modal"
+                        data-bs-target="#ModalUP"
                       >
-                        <i className="fa fa-edit"></i>
+                        <i className="fas fa-edit"></i>
+                        <BrowsOrder/>
                       </button>
                     </td>
                   </tr>
@@ -177,9 +190,13 @@ const OrderManagement = () => {
                       <button
                         className="btn btn-primary btn-sm edit"
                         type="button"
-                        title="Sửa"
+                        title="Duyệt"
+                        id="show-emp"
+                        data-bs-toggle="modal"
+                        data-bs-target="#ModalUP"
                       >
-                        <i className="fa fa-edit"></i>
+                        <i className="fas fa-edit"></i>
+                        <BrowsOrder/>
                       </button>
                     </td>
                   </tr>
@@ -206,9 +223,13 @@ const OrderManagement = () => {
                       <button
                         className="btn btn-primary btn-sm edit"
                         type="button"
-                        title="Sửa"
+                        title="Duyệt"
+                        id="show-emp"
+                        data-bs-toggle="modal"
+                        data-bs-target="#ModalUP"
                       >
-                        <i className="fa fa-edit"></i>
+                        <i className="fas fa-edit"></i>
+                        <BrowsOrder/>
                       </button>
                     </td>
                   </tr>
@@ -235,9 +256,13 @@ const OrderManagement = () => {
                       <button
                         className="btn btn-primary btn-sm edit"
                         type="button"
-                        title="Sửa"
+                        title="Duyệt"
+                        id="show-emp"
+                        data-bs-toggle="modal"
+                        data-bs-target="#ModalUP"
                       >
-                        <i className="fa fa-edit"></i>
+                        <i className="fas fa-edit"></i>
+                        <BrowsOrder/>
                       </button>
                     </td>
                   </tr>

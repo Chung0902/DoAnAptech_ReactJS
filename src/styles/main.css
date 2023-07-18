@@ -558,6 +558,10 @@ th {
 .form-group {
   margin-bottom: 1rem;
 }
+.form-group p{
+  color: rgb(8, 151, 234);
+  font-size: 14px;
+}
 .control-label{
   font-weight: bold;
   font-size: 15px;
