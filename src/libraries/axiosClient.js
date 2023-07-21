@@ -4,11 +4,12 @@ import { REFRESH_TOKEN, TOKEN } from "../constants";
 
 const axiosClient = axios.create({
   baseURL: process.env.REACT_APP_PUBLIC_BASE_URL,
-  headers: { "Content-Type": "application/json" },
+  headers: { Authorization: `Bearer ${localStorage.getItem('AUTHENTICATION_TOKEN')}`,
+    "Content-Type": "application/json" },
 });
 
 axiosClient.interceptors.request.use((config) => {
-  const token = window.localStorage.getItem(TOKEN);
+  const token = window.localStorage.getItem('AUTHENTICATION_TOKEN');
 
   if (token) {
     config.headers['Authorization'] = `Bearer ${token}`;
@@ -21,10 +22,10 @@ axiosClient.interceptors.request.use((config) => {
 
 axiosClient.interceptors.response.use( async (response) => {
   const { token, refreshToken } = response.data;
-
+  
   if (token) {
     window.localStorage.setItem(TOKEN, token);
-  }
+  }console.log(token);
 
   if (refreshToken) {
     window.localStorage.setItem(REFRESH_TOKEN, refreshToken);
