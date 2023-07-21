@@ -22,10 +22,10 @@ const HeaderEm = () => {
             <b>Account</b>
           </li>
           <li>
-            <a href="/AccumulatedVacation.html">
+            <NavLink to="/main/profilemanager" className="active1">
               <span className="fa-solid fa-address-book" />
               <span>Profile</span>
-            </a>
+            </NavLink>
           </li>
           <li className="menu">
             <b>Manager</b>
