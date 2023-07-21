@@ -12,11 +12,8 @@ const EmployeeManager = () => {
   const getAllEmployees = async () => {
     try {
       const response = await axiosClient.get('admin/employees');
-      const data = response.data;
+      setEmployees(response.payload);
       
-      if (data) {
-        setEmployees(data);
-      }
     } catch (error) {
       console.error(error);
     }
@@ -87,7 +84,7 @@ const EmployeeManager = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {employees.length > 0 ? employees.map((e) =>(
+                  {employees && employees.map((e) => e.role === 0 ? (
                   <tr key={e._id}>
                     <td width="10">
                       <input type="checkbox" name="check1" value="1" />
@@ -127,7 +124,9 @@ const EmployeeManager = () => {
                         <UpdateEmployee/>
                 
                     </td>
-                  </tr>)): <tr><td colSpan="10">Không có dữ liệu</td></tr>}
+                  </tr>) : (
+                      ""
+                  ))}
   
                 </tbody>
               </table>

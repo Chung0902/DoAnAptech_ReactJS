@@ -6,6 +6,8 @@ const axiosClient = axios.create({
   baseURL: process.env.REACT_APP_PUBLIC_BASE_URL,
   headers: { Authorization: `Bearer ${localStorage.getItem('AUTHENTICATION_TOKEN')}`,
     "Content-Type": "application/json" },
+    "Cache-Control": "no-cache",
+    Pragma: "no-cache"
 });
 
 axiosClient.interceptors.request.use((config) => {
