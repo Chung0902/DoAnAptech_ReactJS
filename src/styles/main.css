@@ -434,6 +434,12 @@ th {
     border-radius: .375rem;
   }
 
+  .widget-small.primary.coloured-icon i .iicon1{
+    padding-top: -100px;
+  }
+
+
+
 .widget-small.info {
   background-color: #17a2b8;
 }
@@ -688,6 +694,23 @@ fieldset:disabled a.btn {
 .adulc{
   padding-left: 20px;
 }
+
+/* CSS CategoriesManager */
+/* .maincate{
+  margin-left: 30px;
+} */
+.btn-submit{
+  background-color: #189bdc;
+  color: white;
+  margin-bottom: 10px;
+  margin-right: 130px;
+}
+.btn-dele{
+  margin-left: 230px;
+  height: 33px;
+  text-align: center;
+}
+
 
 
 
