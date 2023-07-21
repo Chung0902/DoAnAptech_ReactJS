@@ -16,6 +16,7 @@ import ProductsManager from "./pages/owner/ProductsManager";
 import AddProduct from "./pages/owner/products/AddProduct";
 import OrderManagement from "./pages/owner/OrderManagement";
 import AddOrders from "./pages/owner/orders/AddOrders";
+import RevenueManagement from "./pages/owner/RevenueManagement";
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
           <Route path="/main/productsmanager/addproducts" element={<AddProduct/>} />
           <Route path="/main/ordermanagement" element={<OrderManagement/>} />
           <Route path="/main/ordermanagement/addorders" element={<AddOrders/>} />
+          <Route path="/main/revenuemanagement" element={<RevenueManagement/>} />
         </Route>
 
         <Route path="/login" element={<Login />} />

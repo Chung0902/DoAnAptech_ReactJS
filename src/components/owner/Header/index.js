@@ -34,10 +34,10 @@ const Header = () => {
             </NavLink>
           </li>
           <li>
-            <a href="/BenefitsPaid.html">
+            <NavLink to="/main/revenuemanagement" className="active1">
               <span className="fa-solid fa-gears" />
               <span>Sales report</span>
-            </a>
+            </NavLink>
           </li>
           <li className="menu">
             <b>NOTIFICATION</b>

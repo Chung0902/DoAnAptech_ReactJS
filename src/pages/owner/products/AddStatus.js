@@ -3,7 +3,7 @@ import React from "react";
 const AddStatus = () => {
   return (
     <div
-      class="modal fade"
+      className="modal fade"
       id="addtinhtrang"
       tabindex="-1"
       role="dialog"
@@ -11,22 +11,22 @@ const AddStatus = () => {
       data-backdrop="static"
       data-keyboard="false"
     >
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-body">
-            <div class="row">
-              <div class="form-group  col-md-12">
-                <span class="thong-tin-thanh-toan">
+      <div className="modal-dialog modal-dialog-centered" role="document">
+        <div className="modal-content">
+          <div className="modal-body">
+            <div className="row">
+              <div className="form-group  col-md-12">
+                <span className="thong-tin-thanh-toan">
                   <h5>Thêm mới tình trạng</h5>
                 </span>
               </div>
-              <div class="form-group col-md-12">
-                <label class="control-label">Nhập tình trạng mới</label>
-                <input class="form-control" type="text" require />
+              <div className="form-group col-md-12">
+                <label className="control-label">Nhập tình trạng mới</label>
+                <input className="form-control" type="text" require />
               </div>
             </div>
 
-            <button class="btn btn-save" type="button">
+            <button className="btn btn-save" type="button">
               Lưu lại
             </button>
             <button
@@ -37,7 +37,7 @@ const AddStatus = () => {
               Hủy bỏ
             </button>
           </div>
-          <div class="modal-footer"></div>
+          <div className="modal-footer"></div>
         </div>
       </div>
     </div>

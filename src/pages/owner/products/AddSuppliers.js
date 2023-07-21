@@ -9,21 +9,21 @@ const AddSuppliers = () => {
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
     >
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-body">
-            <div class="row">
-              <div class="form-group  col-md-12">
-                <span class="thong-tin-thanh-toan">
+      <div className="modal-dialog modal-dialog-centered" role="document">
+        <div className="modal-content">
+          <div className="modal-body">
+            <div className="row">
+              <div className="form-group  col-md-12">
+                <span className="thong-tin-thanh-toan">
                   <h5>Thêm mới nhà cung cấp</h5>
                 </span>
               </div>
-              <div class="form-group col-md-12">
-                <label class="control-label">Nhập tên nhà cung cấp</label>
-                <input class="form-control" type="text" required />
+              <div className="form-group col-md-12">
+                <label className="control-label">Nhập tên nhà cung cấp</label>
+                <input className="form-control" type="text" required />
               </div>
             </div>
-            <button class="btn btn-save" type="button">
+            <button className="btn btn-save" type="button">
               Lưu lại
             </button>
             <button
@@ -34,7 +34,7 @@ const AddSuppliers = () => {
               Hủy bỏ
             </button>
           </div>
-          <div class="modal-footer"></div>
+          <div className="modal-footer"></div>
         </div>
       </div>
     </div>
