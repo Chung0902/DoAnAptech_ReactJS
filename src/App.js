@@ -36,7 +36,10 @@ function App() {
           <Route path="/main/ordermanagement" element={<OrderManagement/>} />
           <Route path="/main/ordermanagement/addorders" element={<AddOrders/>} />
           <Route path="/main/revenuemanagement" element={<RevenueManagement/>} />
+
+          <Route path="/main/employeedashboard" element={<MainDashboardAdmin/>} />
         </Route>
+        
 
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
