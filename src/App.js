@@ -17,6 +17,7 @@ import AddProduct from "./pages/owner/products/AddProduct";
 import OrderManagement from "./pages/owner/OrderManagement";
 import AddOrders from "./pages/owner/orders/AddOrders";
 import RevenueManagement from "./pages/owner/RevenueManagement";
+import ProfileManager from "./pages/employee/ProfileManager";
 
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
           <Route path="/main/revenuemanagement" element={<RevenueManagement/>} />
 
           <Route path="/main/employeedashboard" element={<MainDashboardAdmin/>} />
+          <Route path="/main/profilemanager" element={<ProfileManager/>} />
         </Route>
         
 
