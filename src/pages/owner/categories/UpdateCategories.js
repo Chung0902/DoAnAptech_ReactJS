@@ -1,6 +1,7 @@
 import React from 'react'
+import { Form } from 'react-router-dom'
 
-const UpdateCategories = () => {
+const UpdateCategories = ({handleSubmit,value,setValue,setVisible}) => {
   return (
     <div
     className="modal fade"
@@ -11,9 +12,9 @@ const UpdateCategories = () => {
     data-backdrop="static"
     data-keyboard="false"
   >
-    <div className="modal-dialog modal-dialog-centered" role="document">
-      <div className="modal-content">
-        <div className="modal-body">
+    <div className="modal-dialog modal-dialog-centered" role="document" onCancel={() => setVisible(false)}>
+      <div className="modal-content" >
+        <form className="modal-body" onSubmit={handleSubmit}>
           <div className="row">
             <div className="form-group  col-md-12">
               <span className="thong-tin-thanh-toan">
@@ -22,10 +23,11 @@ const UpdateCategories = () => {
             </div>
             <div className="form-group col-md-12">
               <label className="control-label">Nhập tên danh mục sản phẩm</label>
-              <input className="form-control" type="text" required placeholder='Sửa rửa mặt'/>
+              <input className="form-control" type="text" required placeholder='Sửa rửa mặt' value = {value}
+                    onChange={(e)=> setValue(e.target.value)}/>
             </div>
           </div>
-          <button className="btn btn-save" type="button">
+          <button className="btn btn-save" type="submit">
             Lưu lại
           </button>
           <button
@@ -35,7 +37,7 @@ const UpdateCategories = () => {
           >
             Hủy bỏ
           </button>
-        </div>
+        </form>
         <div className="modal-footer"></div>
       </div>
     </div>

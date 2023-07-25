@@ -102,7 +102,7 @@ const EmployeeManager = () => {
                     <td>{e.birthday}</td>
                     <td>Nữ</td>
                     <td>{e.phoneNumber}</td>
-                    <td>Bán hàng</td>
+                    <td>{e.role === 0 ? 'Bán hàng' : 'Giao hàng'}</td>
                     <td className="table-td-center">
                       <button
                         className="btn btn-primary btn-sm trash"
