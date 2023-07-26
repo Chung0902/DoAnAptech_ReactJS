@@ -38,7 +38,7 @@ const CustomerManagement = () => {
           <div className="tile">
             <div className="tile-body">
               <div className="row element-button">
-                <div className="col-sm-3">
+                {/* <div className="col-sm-3">
                   <NavLink
                     to="/main/customermanagement/addcustomer"
                     className="active1"
@@ -52,7 +52,7 @@ const CustomerManagement = () => {
                       Tạo mới khách hàng
                     </a>
                   </NavLink>
-                </div>
+                </div> */}
                 <div className="col-sm-2">
                   <a
                     className="btn btn-delete btn-sm"
