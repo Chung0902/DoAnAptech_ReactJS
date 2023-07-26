@@ -4,7 +4,7 @@ import axiosClient from "../../libraries/axiosClient";
 import { toast } from "react-hot-toast";
 
 const CategoriesManager = () => {
-  const [categories,setCategories]= useState();
+  const [categories,setCategories]= useState([]);
   
   const [name,setName] = useState("")
   const [visible,setVisible]= useState(false)
@@ -14,11 +14,12 @@ const CategoriesManager = () => {
   const handleSubmit = async (e) =>{
     e.preventDefault();
     try {
-      const { response } = await axiosClient.post("admin/categories", { name });
+      const response = await axiosClient.post("admin/categories", { name });
       if (response?.payload) {
         toast.success(response.message);
+        console.log(response.message)
         setName(response.payload);
-        getAllCategories();
+        setCategories([...categories, response.payload]); // Thêm danh mục mới vào danh sách
       } 
     } catch (error) {
       console.log(error);
@@ -30,7 +31,12 @@ const CategoriesManager = () => {
   const getAllCategories = async () => {
     try {
       const response = await axiosClient.get('admin/categories');
-      setCategories(response.payload);
+      if(response?.payload){
+        setCategories(response.payload);
+      }else{
+        alert('khong co du lieu!')
+      }
+      
       
     } catch (error) {
       console.error(error);
@@ -44,12 +50,17 @@ const CategoriesManager = () => {
 const handleUpdate = async (e) =>{
   e.preventDefault();
   try {
-      const {data} = await axiosClient.patch(`admin/categories/${selected._id}`, {name: updateName});
-      if(data.success){
+      const response = await axiosClient.patch(`admin/categories/${selected._id}`, {name: updateName});
+      if(response.success){
           toast.success(`${updateName} is updated`);
           setSelected(null);
           setUpdateName("");
-          getAllCategories();
+          setCategories(categories.map((category) => {
+            if (category._id === selected._id) {
+              return { ...category, name: updateName }; // Cập nhật tên của danh mục tương ứng
+            }
+            return category;
+          }));
       }
 
   } catch (error) {
@@ -61,10 +72,10 @@ const handleUpdate = async (e) =>{
     //Delete category
     const handleDelete = async (pId) =>{
       try {
-          const {response} = await axiosClient.delete(`admin/categories/${pId}`);
-          if(response.success){
+          const response = await axiosClient.delete(`admin/categories/${pId}`);
+          if(response?.success){
               toast.success(`category is deleted`);
-              getAllCategories();
+              setCategories(categories.filter((category) => category._id !== pId)); // Loại bỏ danh mục đã được xóa khỏi danh sách
           }
           
       } catch (error) {

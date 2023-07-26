@@ -9,6 +9,15 @@ import { useAuth } from "../../context/auth";
 
 const Layout = () => {
   const [auth, setAuth] = useAuth();
+
+  const handleLogout = () => {
+    setAuth({
+      ...auth,
+      user: null,
+      token: "",
+    });
+    localStorage.removeItem("auth");
+  };
   return (
     <>
       <div>
@@ -36,7 +45,7 @@ const Layout = () => {
                   <li><Link className="dropdown-item" to="#">Profile</Link></li>
                   <li><Link className="dropdown-item" to="#">Another action</Link></li>
                   <li><hr className="dropdown-divider" /></li>
-                  <li><Link className="dropdown-item" to="/login">Logout</Link></li>
+                  <li><Link className="dropdown-item" onClick={handleLogout} to="/login">Logout</Link></li>
                 </ul>
               </div>
             </div>
