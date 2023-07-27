@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axiosClient from "../../libraries/axiosClient";
 import {
   FaHospitalUser,
   FaBandcamp,
@@ -11,6 +12,134 @@ import {
 } from "react-icons/fa";
 
 const RevenueManagement = () => {
+  const [totalProducts, setTotalProducts] = useState(0);
+  const [totalstaff, setTotalstaff] = useState(0);
+  const [totalorder, setTotalorder] = useState(0);
+  const [totalIncome, setTotalIncome] = useState(0);
+  const [newemployees, setNewEmployees] = useState(0);
+  const [outstock, setOutstock] = useState(0);
+  const [canceledorder, setCanceledorder] = useState(0);
+  const [bestsellerlist, setBestsellerlist] = useState([]);
+
+  
+  
+  //tổng sản phẩm
+  const getGrossProduct = async () => {
+    try {
+      const response = await axiosClient.get("questions/grossproduct");
+      if (response && response.payload) {
+        // Lấy độ dài của mảng sản phẩm để tính tổng số sản phẩm
+        const totalProducts = response.payload.length;
+        setTotalProducts(totalProducts);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  //tổng nhân viên
+  const getTotalStaff = async () => {
+    try {
+      const response = await axiosClient.get("questions/totalstaff");
+      if (response && response.payload) {
+        // Lấy độ dài của mảng nhân viên để tính tổng số nhân viên
+        const totalstaff = response.payload.length;
+        setTotalstaff(totalstaff);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  //tổng đơn hàng
+  const getTotalOrder = async () => {
+    try {
+      const response = await axiosClient.get("questions/totalorder");
+      if (response && response.payload) {
+        const totalorder = response.payload.length;
+        setTotalorder(totalorder);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  //tổng thu nhập
+  const getTotalIncome = async () => {
+    try {
+      const response = await axiosClient.get("questions/totalIncome");
+      if (response && response.totalIncome !== undefined) {
+        const totalIncomeValue = parseFloat(response.totalIncome);
+        setTotalIncome(totalIncomeValue);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  //tổng nhân viên mới cập nhật theo ngày
+  const getCountNewEmployees = async () => {
+    try {
+      const response = await axiosClient.get("questions/countNewEmployees");
+      if (response && response.payload) {
+        const newemployees = response.payload.length;
+        setNewEmployees(newemployees);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
+  //tổng sản phẩm hết hàng
+  const getOutStock = async () => {
+    try {
+      const response = await axiosClient.get("questions/outstock");
+      if (response && response.totalOutstock !== undefined) {
+        const outstock = parseFloat(response.totalOutstock);
+        setOutstock(outstock);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  //tổng sản phẩm bị hủy
+  const getCanceledOrder = async () => {
+    try {
+      const response = await axiosClient.get("questions/canceledorder");
+      if (response && response.totalResult !== undefined) {
+        const canceledorder = parseFloat(response.totalResult);
+        setCanceledorder(canceledorder);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  //hiển thị danh sách bán chạy nhất
+  const getbestsellerlist = async () => {
+    try {
+      const response = await axiosClient.get('questions/bestsellerlist');
+      setBestsellerlist(response.payload);
+      
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
+  
+
+  useEffect(() => {
+    getGrossProduct();
+    getTotalStaff();
+    getTotalOrder();
+    getTotalIncome();
+    getCountNewEmployees();
+    getOutStock();
+    getCanceledOrder();
+    getbestsellerlist();
+
+  }, []);
+
   return (
     <main className="app-content">
       <div className="row">
@@ -38,26 +167,26 @@ const RevenueManagement = () => {
             <div className="info">
               <h4>Tổng Nhân viên</h4>
               <p>
-                <b>26 nhân viên</b>
+                <b>{totalstaff} nhân viên</b>
               </p>
             </div>
           </div>
         </div>
-        <div className="col-md-3 col-lg-3">
-          <div className="widget-small info coloured-icon">
-            <div className="iicon ">
-              <i className="icon ">
-                <FaBandcamp />
-              </i>
+            <div className="col-md-3 col-lg-3">
+              <div className="widget-small info coloured-icon">
+                <div className="iicon ">
+                  <i className="icon ">
+                    <FaBandcamp />
+                  </i>
+                </div>
+                <div className="info">
+                  <h4>Tổng sản phẩm</h4>
+                  <p>
+                    <b>{totalProducts} sản phẩm</b>
+                  </p>
+                </div>
+              </div>
             </div>
-            <div className="info">
-              <h4>Tổng sản phẩm</h4>
-              <p>
-                <b>8580 sản phẩm</b>
-              </p>
-            </div>
-          </div>
-        </div>
         <div className="col-md-3 col-lg-3">
           <div className="widget-small warning coloured-icon">
             <div className="iicon ">
@@ -69,7 +198,7 @@ const RevenueManagement = () => {
             <div className="info">
               <h4>Tổng đơn hàng</h4>
               <p>
-                <b>457 đơn hàng</b>
+                <b>{totalorder} đơn hàng</b>
               </p>
             </div>
           </div>
@@ -99,11 +228,10 @@ const RevenueManagement = () => {
                 <FaRegMoneyBillAlt />
               </i>
             </div>
-
             <div className="info">
               <h4>Tổng thu nhập</h4>
               <p>
-                <b>104.890.000 đ</b>
+                <b>{totalIncome} đ</b>
               </p>
             </div>
           </div>
@@ -119,7 +247,7 @@ const RevenueManagement = () => {
             <div className="info">
               <h4>Nhân viên mới</h4>
               <p>
-                <b>3 nhân viên</b>
+                <b>{newemployees} nhân viên</b>
               </p>
             </div>
           </div>
@@ -135,7 +263,7 @@ const RevenueManagement = () => {
             <div className="info">
               <h4>Hết hàng</h4>
               <p>
-                <b>1 sản phẩm</b>
+                <b>{outstock} sản phẩm</b>
               </p>
             </div>
           </div>
@@ -151,7 +279,7 @@ const RevenueManagement = () => {
             <div className="info">
               <h4>Đơn hàng hủy</h4>
               <p>
-                <b>2 đơn hàng</b>
+                <b>{canceledorder} đơn hàng</b>
               </p>
             </div>
           </div>
@@ -173,40 +301,18 @@ const RevenueManagement = () => {
                     <th>Mã sản phẩm</th>
                     <th>Tên sản phẩm</th>
                     <th>Giá tiền</th>
-                    <th>Danh mục</th>
+                    <th>Đã bán</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>71309005</td>
-                    <td>Bàn ăn gỗ Theresa</td>
-                    <td>5.600.000 đ</td>
-                    <td>Bàn ăn</td>
+                {bestsellerlist && bestsellerlist.map((e) =>(
+                  <tr key={e._id}>
+                    <td>{e._id}</td>
+                    <td>{e.name}</td>
+                    <td>{e.price} đ</td>
+                    <td>{e.totalQuantity}</td>
                   </tr>
-                  <tr>
-                    <td>62304003</td>
-                    <td>Bàn ăn Vitali mặt đá</td>
-                    <td>33.235.000 đ</td>
-                    <td>Bàn ăn</td>
-                  </tr>
-                  <tr>
-                    <td>72109004</td>
-                    <td>Ghế làm việc Zuno</td>
-                    <td>3.800.000 đ</td>
-                    <td>Ghế gỗ</td>
-                  </tr>
-                  <tr>
-                    <td>83826226</td>
-                    <td>Tủ ly - tủ bát</td>
-                    <td>2.450.000 đ</td>
-                    <td>Tủ</td>
-                  </tr>
-                  <tr>
-                    <td>71304041</td>
-                    <td>Bàn ăn mở rộng Vegas</td>
-                    <td>21.550.000 đ</td>
-                    <td>Bàn thông minh</td>
-                  </tr>
+                ))}
                 </tbody>
               </table>
             </div>
