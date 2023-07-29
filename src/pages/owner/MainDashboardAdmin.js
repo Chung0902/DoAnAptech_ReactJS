@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axiosClient from "../../libraries/axiosClient";
 import "../../../src/styles/main.css";
 import {
   FaHouseUser,
@@ -10,6 +11,84 @@ import BarChart from "./dashboard/BarChart";
 import PolarAreaChart from "./dashboard/PolarAreaChart";
 
 const MainDashboardAdmin = () => {
+  const [totalProducts, setTotalProducts] = useState(0);
+  const [totalorder, setTotalorder] = useState(0);
+  const [totalcustomer, setTotalcustomer] = useState(0);
+  const [outstock, setOutstock] = useState(0);
+  const [employees, setEmployees] = useState([]);
+
+  //tổng sản phẩm
+  const getGrossProduct = async () => {
+    try {
+      const response = await axiosClient.get("questions/grossproduct");
+      if (response && response.payload) {
+        // Lấy độ dài của mảng sản phẩm để tính tổng số sản phẩm
+        const totalProducts = response.payload.length;
+        setTotalProducts(totalProducts);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+   //tổng đơn hàng
+   const getTotalOrder = async () => {
+    try {
+      const response = await axiosClient.get("questions/totalorder");
+      if (response && response.payload) {
+        const totalorder = response.payload.length;
+        setTotalorder(totalorder);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+    //tổng khách hàng
+    const getTotalcustomer = async () => {
+      try {
+        const response = await axiosClient.get("questions/totalcustomer");
+        if (response && response.payload) {
+          const totalcustomer = response.payload.length;
+          setTotalcustomer(totalcustomer);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+     //tổng sản phẩm sắp hết hàng
+  const getOutStock = async () => {
+    try {
+      const response = await axiosClient.get("questions/outstock1");
+      if (response && response.totalOutstock !== undefined) {
+        const outstock = parseFloat(response.totalOutstock);
+        setOutstock(outstock);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+   //hiển thị danh sách nhân viên mới
+   const getNewEmployees = async () => {
+    try {
+      const response = await axiosClient.get("questions/countNewEmployees");
+      setEmployees(response.newEmployees);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+
+  useEffect(() => {
+    getGrossProduct();
+    getTotalOrder();
+    getTotalcustomer();
+    getOutStock();
+    getNewEmployees();
+  }, []);
+  
   return (
     <main className="app-content">
       <div className="row">
@@ -39,7 +118,7 @@ const MainDashboardAdmin = () => {
                 <div className="info">
                   <h4>Tổng khách hàng</h4>
                   <p>
-                    <b>56 khách hàng</b>
+                    <b>{totalcustomer} khách hàng</b>
                   </p>
                   <p className="info-tong">Tổng số khách hàng được quản lý.</p>
                 </div>
@@ -55,7 +134,7 @@ const MainDashboardAdmin = () => {
                 <div className="info">
                   <h4>Tổng sản phẩm</h4>
                   <p>
-                    <b>1850 sản phẩm</b>
+                    <b>{totalProducts} sản phẩm</b>
                   </p>
                   <p className="info-tong">Tổng số sản phẩm được quản lý.</p>
                 </div>
@@ -71,7 +150,7 @@ const MainDashboardAdmin = () => {
                 <div className="info">
                   <h4>Tổng đơn hàng</h4>
                   <p>
-                    <b>247 đơn hàng</b>
+                    <b>{totalorder} đơn hàng</b>
                   </p>
                   <p className="info-tong">
                     Tổng số hóa đơn bán hàng trong tháng.
@@ -89,7 +168,7 @@ const MainDashboardAdmin = () => {
                 <div className="info">
                   <h4>Sắp hết hàng</h4>
                   <p>
-                    <b>4 sản phẩm</b>
+                    <b>{outstock} sản phẩm</b>
                   </p>
                   <p className="info-tong">
                     Số sản phẩm cảnh báo hết cần nhập thêm.
@@ -157,49 +236,27 @@ const MainDashboardAdmin = () => {
                 <h3 className="tile-title">Khách hàng mới</h3>
                 <div>
                   <table className="table table-bordered">
-                    <thead>
-                      <tr>
-                        <th>ID</th>
-                        <th>Tên khách hàng</th>
-                        <th>Ngày sinh</th>
-                        <th>Số điện thoại</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>#183</td>
-                        <td>Nguyễn Đặng Kiều Diểm</td>
-                        <td>21/7/1992</td>
+                  <thead>
+                  <tr>
+                    <th>Họ và tên</th>
+                    <th>Địa chỉ</th>
+                    <th>SĐT</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {employees &&
+                    employees.map((e) => (
+                      <tr key={e._id}>
                         <td>
-                          <span className="tag tag-success">0921387221</span>
+                          {e.firstName }
+                          {e.lastName }
                         </td>
+                        <td>{e.address} </td>
+                        <td>{e.phoneNumber}</td>
                       </tr>
-                      <tr>
-                        <td>#219</td>
-                        <td>Nguyễn Thị Chung</td>
-                        <td>30/4/1975</td>
-                        <td>
-                          <span className="tag tag-warning">0912376352</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>#627</td>
-                        <td>Trương Văn Nhật</td>
-                        <td>12/3/1999</td>
-                        <td>
-                          <span className="tag tag-primary">01287326654</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>#175</td>
-                        <td>Nguyễn Minh Thắng</td>
-                        <td>4/12/20000</td>
-                        <td>
-                          <span className="tag tag-danger">0912376763</span>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
+                    ))}
+                </tbody>
+              </table>
                 </div>
               </div>
             </div>

@@ -22,6 +22,8 @@ const RevenueManagement = () => {
   const [bestsellerlist, setBestsellerlist] = useState([]);
   const [totalsupplier, setTotalsupplier] = useState(0);
   const [CompletedOrders, setCompletedOrders] = useState([]);
+  const [employees, setEmployees] = useState([]);
+  const [outstockk, setOutstockk] = useState([]);
 
   //tổng nhà cung cấp
   const getTotalsupplier = async () => {
@@ -102,6 +104,16 @@ const RevenueManagement = () => {
     }
   };
 
+  //hiển thị danh sách nhân viên mới
+  const getNewEmployees = async () => {
+    try {
+      const response = await axiosClient.get("questions/countNewEmployees");
+      setEmployees(response.newEmployees);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   //tổng sản phẩm hết hàng
   const getOutStock = async () => {
     try {
@@ -110,6 +122,16 @@ const RevenueManagement = () => {
         const outstock = parseFloat(response.totalOutstock);
         setOutstock(outstock);
       }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+   //Hiển thị danh sách sản phẩm hết hàng
+   const getOutStockk = async () => {
+    try {
+      const response = await axiosClient.get("questions/outstock");
+      setOutstockk(response.newProduct);
     } catch (error) {
       console.error(error);
     }
@@ -148,6 +170,15 @@ const RevenueManagement = () => {
     }
   };
 
+  // Hàm biến đổi định dạng ngày sinh
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear().toString().slice(0);
+    return `${day}/${month}/${year}`;
+  };
+
   useEffect(() => {
     getGrossProduct();
     getTotalStaff();
@@ -159,6 +190,8 @@ const RevenueManagement = () => {
     getbestsellerlist();
     getTotalsupplier();
     getCompletedOrders();
+    getNewEmployees();
+    getOutStockk();
   }, []);
 
   return (
@@ -408,23 +441,29 @@ const RevenueManagement = () => {
                     <th>Số lượng</th>
                     <th>Tình trạng</th>
                     <th>Giá tiền</th>
-                    <th>Danh mục</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>83826226</td>
-                    <td>Tủ ly - tủ bát</td>
+                {outstockk &&
+                    outstockk.map((e) => (
+                  <tr key={e._id}>
+                    <td>{e._id}</td>
+                    <td>{e.name}</td>
                     <td>
-                      <img src="/img-sanpham/tu.jpg" alt="" width="100px;" />
+                      <img
+                        src={e.photo}
+                        alt=""
+                        width="100px;"
+                        height={"100px"}
+                      />
                     </td>
-                    <td>0</td>
+                    <td>{e.stock}</td>
                     <td>
                       <span className="badge bg-danger">Hết hàng</span>
                     </td>
-                    <td>2.450.000 đ</td>
-                    <td>Tủ</td>
+                    <td>{e.price} đ</td>
                   </tr>
+                    ))}
                 </tbody>
               </table>
             </div>
@@ -449,34 +488,22 @@ const RevenueManagement = () => {
                     <th>Ngày sinh</th>
                     <th>Giới tính</th>
                     <th>SĐT</th>
-                    <th>Chức vụ</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>Hồ Thị Thanh Ngân</td>
-                    <td>155-157 Trần Quốc Thảo, Quận 3, Hồ Chí Minh </td>
-                    <td>12/02/1999</td>
-                    <td>Nữ</td>
-                    <td>0926737168</td>
-                    <td>Bán hàng</td>
-                  </tr>
-                  <tr>
-                    <td>Trần Khả Ái</td>
-                    <td>6 Nguyễn Lương Bằng, Tân Phú, Quận 7, Hồ Chí Minh</td>
-                    <td>22/12/1999</td>
-                    <td>Nữ</td>
-                    <td>0931342432</td>
-                    <td>Bán hàng</td>
-                  </tr>
-                  <tr>
-                    <td>Nguyễn Đặng Trọng Nhân</td>
-                    <td>59C Nguyễn Đình Chiểu, Quận 3, Hồ Chí Minh </td>
-                    <td>23/07/1996</td>
-                    <td>Nam</td>
-                    <td>0846881155</td>
-                    <td>Dịch vụ</td>
-                  </tr>
+                  {employees &&
+                    employees.map((e) => (
+                      <tr key={e._id}>
+                        <td>
+                          {e.firstName }
+                          {e.lastName }
+                        </td>
+                        <td>{e.address} </td>
+                        <td>{formatDate(e.birthday)}</td>
+                        <td>{e.sex}</td>
+                        <td>{e.phoneNumber}</td>
+                      </tr>
+                    ))}
                 </tbody>
               </table>
             </div>
