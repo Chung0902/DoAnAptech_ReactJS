@@ -4,11 +4,11 @@ import {
   FaHospitalUser,
   FaBandcamp,
   FaFirstOrderAlt,
-  FaUserAltSlash,
   FaRegMoneyBillAlt,
   FaUserCheck,
   FaTimesCircle,
   FaCalendarDay,
+  FaIdCard,
 } from "react-icons/fa";
 
 const RevenueManagement = () => {
@@ -20,9 +20,22 @@ const RevenueManagement = () => {
   const [outstock, setOutstock] = useState(0);
   const [canceledorder, setCanceledorder] = useState(0);
   const [bestsellerlist, setBestsellerlist] = useState([]);
+  const [totalsupplier, setTotalsupplier] = useState(0);
+  const [CompletedOrders, setCompletedOrders] = useState([]);
 
-  
-  
+  //tổng nhà cung cấp
+  const getTotalsupplier = async () => {
+    try {
+      const response = await axiosClient.get("questions/totalsupplier");
+      if (response && response.payload) {
+        const totalsupplier = response.payload.length;
+        setTotalsupplier(totalsupplier);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   //tổng sản phẩm
   const getGrossProduct = async () => {
     try {
@@ -66,7 +79,7 @@ const RevenueManagement = () => {
   //tổng thu nhập
   const getTotalIncome = async () => {
     try {
-      const response = await axiosClient.get("questions/totalIncome");
+      const response = await axiosClient.get("questions/CompletedOrders");
       if (response && response.totalIncome !== undefined) {
         const totalIncomeValue = parseFloat(response.totalIncome);
         setTotalIncome(totalIncomeValue);
@@ -76,19 +89,19 @@ const RevenueManagement = () => {
     }
   };
 
-  //tổng nhân viên mới cập nhật theo ngày
+  //tổng nhân viên mới cập nhật theo tuần gần nhất
   const getCountNewEmployees = async () => {
     try {
       const response = await axiosClient.get("questions/countNewEmployees");
-      if (response && response.payload) {
-        const newemployees = response.payload.length;
+      if (response && response.totalNewEmployees !== undefined) {
+        const newemployees = parseFloat(response.totalNewEmployees);
         setNewEmployees(newemployees);
       }
     } catch (error) {
       console.error(error);
     }
   };
-  
+
   //tổng sản phẩm hết hàng
   const getOutStock = async () => {
     try {
@@ -115,18 +128,25 @@ const RevenueManagement = () => {
     }
   };
 
-  //hiển thị danh sách bán chạy nhất
-  const getbestsellerlist = async () => {
+  //hiển thị danh sách đơn hàng đã hoàn thành
+  const getCompletedOrders = async () => {
     try {
-      const response = await axiosClient.get('questions/bestsellerlist');
-      setBestsellerlist(response.payload);
-      
+      const response = await axiosClient.get("questions/CompletedOrders");
+      setCompletedOrders(response.payload);
     } catch (error) {
       console.error(error);
     }
   };
-  
-  
+
+  //hiển thị danh sách bán chạy nhất
+  const getbestsellerlist = async () => {
+    try {
+      const response = await axiosClient.get("questions/bestsellerlist");
+      setBestsellerlist(response.payload);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
     getGrossProduct();
@@ -137,7 +157,8 @@ const RevenueManagement = () => {
     getOutStock();
     getCanceledOrder();
     getbestsellerlist();
-
+    getTotalsupplier();
+    getCompletedOrders();
   }, []);
 
   return (
@@ -172,21 +193,21 @@ const RevenueManagement = () => {
             </div>
           </div>
         </div>
-            <div className="col-md-3 col-lg-3">
-              <div className="widget-small info coloured-icon">
-                <div className="iicon ">
-                  <i className="icon ">
-                    <FaBandcamp />
-                  </i>
-                </div>
-                <div className="info">
-                  <h4>Tổng sản phẩm</h4>
-                  <p>
-                    <b>{totalProducts} sản phẩm</b>
-                  </p>
-                </div>
-              </div>
+        <div className="col-md-3 col-lg-3">
+          <div className="widget-small info coloured-icon">
+            <div className="iicon ">
+              <i className="icon ">
+                <FaBandcamp />
+              </i>
             </div>
+            <div className="info">
+              <h4>Tổng sản phẩm</h4>
+              <p>
+                <b>{totalProducts} sản phẩm</b>
+              </p>
+            </div>
+          </div>
+        </div>
         <div className="col-md-3 col-lg-3">
           <div className="widget-small warning coloured-icon">
             <div className="iicon ">
@@ -207,14 +228,14 @@ const RevenueManagement = () => {
           <div className="widget-small danger coloured-icon">
             <div className="iicon ">
               <i className="icon ">
-                <FaUserAltSlash />
+                <FaIdCard />
               </i>
             </div>
 
             <div className="info">
-              <h4>Bị cấm</h4>
+              <h4>Tổng NCC</h4>
               <p>
-                <b>4 nhân viên</b>
+                <b>{totalsupplier} nhà cung cấp</b>
               </p>
             </div>
           </div>
@@ -305,14 +326,15 @@ const RevenueManagement = () => {
                   </tr>
                 </thead>
                 <tbody>
-                {bestsellerlist && bestsellerlist.map((e) =>(
-                  <tr key={e._id}>
-                    <td>{e._id}</td>
-                    <td>{e.name}</td>
-                    <td>{e.price} đ</td>
-                    <td>{e.totalQuantity}</td>
-                  </tr>
-                ))}
+                  {bestsellerlist &&
+                    bestsellerlist.map((e) => (
+                      <tr key={e._id}>
+                        <td>{e._id}</td>
+                        <td>{e.name}</td>
+                        <td>{e.price} đ</td>
+                        <td>{e.totalQuantity}</td>
+                      </tr>
+                    ))}
                 </tbody>
               </table>
             </div>
@@ -323,7 +345,7 @@ const RevenueManagement = () => {
         <div className="col-md-12">
           <div className="tile">
             <div>
-              <h3 className="tile-title">TỔNG ĐƠN HÀNG</h3>
+              <h3 className="tile-title">TỔNG ĐƠN HÀNG ĐÃ HOÀN THÀNH</h3>
             </div>
             <div className="tile-body">
               <table
@@ -339,57 +361,29 @@ const RevenueManagement = () => {
                     <th>Tổng tiền</th>
                   </tr>
                 </thead>
-                <tbody>
+                {CompletedOrders &&
+                  CompletedOrders.map((e) => (
+                    <tbody key={e.order._id}>
+                      {e.orderDetails.map((orderDetail) => (
+                        <tr key={orderDetail.productId}>
+                          <td>{orderDetail.productId}</td>
+                          <td>
+                            {e.order.customer.firstName}
+                            {e.order.customer.lastName}
+                          </td>
+                          <td>{orderDetail.productName}</td>
+                          <td>{orderDetail.quantity}</td>
+                          <td>{orderDetail.totalOrderDetailPrice} đ</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  ))}
+                <tfoot>
                   <tr>
-                    <td>MD0837</td>
-                    <td>Triệu Thanh Phú</td>
-                    <td>Ghế làm việc Zuno, Bàn ăn gỗ Theresa</td>
-                    <td>2 sản phẩm</td>
-                    <td>9.400.000 đ</td>
+                    <th colSpan="4">Tổng cộng:</th>
+                    <td>{totalIncome} đ</td>
                   </tr>
-                  <tr>
-                    <td>MĐ8265</td>
-                    <td>Nguyễn Thị Ngọc Cẩm</td>
-                    <td>Ghế ăn gỗ Lucy màu trắng</td>
-                    <td>1 sản phẩm</td>
-                    <td>3.800.000 đ</td>
-                  </tr>
-                  <tr>
-                    <td>MT9835</td>
-                    <td>Đặng Hoàng Phúc</td>
-                    <td>
-                      Giường ngủ Jimmy, Bàn ăn mở rộng cao cấp Dolas, Ghế làm
-                      việc Zuno
-                    </td>
-                    <td>3 sản phẩm</td>
-                    <td>40.650.000 đ</td>
-                  </tr>
-                  <tr>
-                    <td>ER3835</td>
-                    <td>Nguyễn Thị Mỹ Yến</td>
-                    <td>Bàn ăn mở rộng Gepa</td>
-                    <td>1 sản phẩm</td>
-                    <td>16.770.000 đ</td>
-                  </tr>
-                  <tr>
-                    <td>AL3947</td>
-                    <td>Phạm Thị Ngọc</td>
-                    <td>Bàn ăn Vitali mặt đá, Ghế ăn gỗ Lucy màu trắng</td>
-                    <td>2 sản phẩm</td>
-                    <td>19.770.000 đ</td>
-                  </tr>
-                  <tr>
-                    <td>QY8723</td>
-                    <td>Ngô Thái An</td>
-                    <td>Giường ngủ Kara 1.6x2m</td>
-                    <td>1 sản phẩm</td>
-                    <td>14.500.000 đ</td>
-                  </tr>
-                  <tr>
-                    <th colspan="4">Tổng cộng:</th>
-                    <td>104.890.000 đ</td>
-                  </tr>
-                </tbody>
+                </tfoot>
               </table>
             </div>
           </div>
@@ -485,30 +479,6 @@ const RevenueManagement = () => {
                   </tr>
                 </tbody>
               </table>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="row">
-        <div className="col-md-6">
-          <div className="tile">
-            <h3 className="tile-title">DỮ LIỆU HÀNG THÁNG</h3>
-            <div className="embed-responsive embed-responsive-16by9">
-              <canvas
-                className="embed-responsive-item"
-                id="lineChartDemo"
-              ></canvas>
-            </div>
-          </div>
-        </div>
-        <div className="col-md-6">
-          <div className="tile">
-            <h3 className="tile-title">THỐNG KÊ DOANH SỐ</h3>
-            <div className="embed-responsive embed-responsive-16by9">
-              <canvas
-                className="embed-responsive-item"
-                id="barChartDemo"
-              ></canvas>
             </div>
           </div>
         </div>
