@@ -1,6 +1,6 @@
 import React from "react";
 
-const UpdateEmployee = () => {
+const UpdateEmployee = ({handleSubmit,firstName,lastName,phoneNumber,email,address,handleRoleChange,setFirstName,setLastName,setPhoneNumber,setEmail,setAddress,setVisible}) => {
   return (
     <div>
       <div
@@ -11,7 +11,7 @@ const UpdateEmployee = () => {
         aria-hidden="true"
       >
         <div className="modal-dialog modal-dialog-centered" role="document">
-          <div className="modal-content">
+          <form className="modal-content" onSubmit={handleSubmit}>
             <div className="modal-body">
               <div className="row">
                 <div className="form-group  col-md-12">
@@ -27,7 +27,8 @@ const UpdateEmployee = () => {
                     className="form-control"
                     type="text"
                     required
-                    value="#CD2187"
+                    value={firstName}
+                    onChange={(e)=> setFirstName(e.target.value)}
                     disabled
                   />
                 </div>
@@ -37,7 +38,8 @@ const UpdateEmployee = () => {
                     className="form-control"
                     type="text"
                     required
-                    value="Võ Trường"
+                    value={lastName}
+                    onChange={(e)=> setLastName(e.target.value)}
                   />
                 </div>
                 <div className="form-group  col-md-6">
@@ -46,7 +48,8 @@ const UpdateEmployee = () => {
                     className="form-control"
                     type="number"
                     required
-                    value="09267312388"
+                    value={phoneNumber}
+                    onChange={(e)=> setPhoneNumber(e.target.value)}
                   />
                 </div>
                 <div className="form-group col-md-6">
@@ -55,27 +58,22 @@ const UpdateEmployee = () => {
                     className="form-control"
                     type="text"
                     required
-                    value="truong.vd2000@gmail.com"
+                    value={email}
+                    onChange={(e)=> setEmail(e.target.value)}
                   />
                 </div>
                 <div className="form-group col-md-6">
-                  <label className="control-label">Ngày sinh</label>
-                  <input className="form-control" type="date" value="15/03/2000" />
+                  <label className="control-label">Địa chỉ thường trú</label>
+                  <input className="form-control" type="text" value={address} onChange={(e)=> setAddress(e.target.value)}/>
                 </div>
                 <div className="form-group  col-md-6">
-                  <label for="exampleSelect1" className="control-label">
+                  <label htmlFor="exampleSelect1" className="control-label">
                     Chức vụ
                   </label>
-                  <select className="form-control" id="exampleSelect1">
+                  <select className="form-control" id="exampleSelect1"  onChange={handleRoleChange}>
                     <option>Bán hàng</option>
-                    <option>Tư vấn</option>
-                    <option>Dịch vụ</option>
-                    <option>Thu Ngân</option>
-                    <option>Quản kho</option>
-                    <option>Bảo trì</option>
-                    <option>Kiểm hàng</option>
-                    <option>Bảo vệ</option>
-                    <option>Tạp vụ</option>
+                    <option>Chủ shop</option>
+                    <option>Shipper</option>
                   </select>
                 </div>
               </div>
@@ -88,11 +86,11 @@ const UpdateEmployee = () => {
               >
                 Hủy
               </button>
-              <button type="button" className="btn btn-primary">
+              <button type="submit" className="btn btn-primary">
                 Cập nhật
               </button>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>
