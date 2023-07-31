@@ -248,7 +248,7 @@ const MainDashboardAdmin = () => {
                     employees.map((e) => (
                       <tr key={e._id}>
                         <td>
-                          {e.firstName }
+                          {e.firstName }{" "}
                           {e.lastName }
                         </td>
                         <td>{e.address} </td>
