@@ -16,6 +16,7 @@ const MainDashboardAdmin = () => {
   const [totalcustomer, setTotalcustomer] = useState(0);
   const [outstock, setOutstock] = useState(0);
   const [employees, setEmployees] = useState([]);
+  const [top5Customers, setTop5Customers] = useState([]);
 
   //tổng sản phẩm
   const getGrossProduct = async () => {
@@ -80,6 +81,16 @@ const MainDashboardAdmin = () => {
     }
   };
 
+  //hiển thị danh sách top 5 khách hàng mua nhiều nhất
+  const getTop5Customers = async () => {
+    try {
+      const response = await axiosClient.get("questions/getTop5Customers");
+      setTop5Customers(response.payload);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
 
   useEffect(() => {
     getGrossProduct();
@@ -87,6 +98,7 @@ const MainDashboardAdmin = () => {
     getTotalcustomer();
     getOutStock();
     getNewEmployees();
+    getTop5Customers();
   }, []);
   
   return (
@@ -178,54 +190,27 @@ const MainDashboardAdmin = () => {
             </div>
             <div className="col-md-12">
               <div className="tile">
-                <h3 className="tile-title">Tình trạng đơn hàng</h3>
+                <h3 className="tile-title">Khách hàng có lượt mua nhiều nhất</h3>
                 <div>
                   <table className="table table-bordered">
                     <thead>
                       <tr>
-                        <th>ID đơn hàng</th>
+                        <th>ID khách hàng</th>
                         <th>Tên khách hàng</th>
+                        <th>Số lượt mua</th>
                         <th>Tổng tiền</th>
-                        <th>Trạng thái</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>AL3947</td>
-                        <td>Phạm Thị Ngọc</td>
-                        <td>19.770.000 đ</td>
-                        <td>
-                          <span className="badge bg-info">Chờ xử lý</span>
-                        </td>
+                    {top5Customers &&
+                    top5Customers.map((e) => (
+                      <tr key={e.customerId}>
+                        <td>{e.customerId}</td>
+                        <td>{e.firstName}{" "}{e.lastName}</td>
+                        <td>{e.totalPurchase}</td>
+                        <td>{e.totalPrice} đ</td>
                       </tr>
-                      <tr>
-                        <td>ER3835</td>
-                        <td>Nguyễn Thị Mỹ Yến</td>
-                        <td>16.770.000 đ</td>
-                        <td>
-                          <span className="badge bg-warning">
-                            Đang vận chuyển
-                          </span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>MD0837</td>
-                        <td>Triệu Thanh Phú</td>
-                        <td>9.400.000 đ</td>
-                        <td>
-                          <span className="badge bg-success">
-                            Đã hoàn thành
-                          </span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>MT9835</td>
-                        <td>Đặng Hoàng Phúc </td>
-                        <td>40.650.000 đ</td>
-                        <td>
-                          <span className="badge bg-danger">Đã hủy </span>
-                        </td>
-                      </tr>
+                    ))}
                     </tbody>
                   </table>
                 </div>
@@ -266,17 +251,28 @@ const MainDashboardAdmin = () => {
           <div className="row">
             <div className="col-md-12">
               <div className="tile">
-                <h3 className="tile-title">Dữ liệu 5 tháng đầu vào</h3>
+                {/* <h3 className="tile-title">Dữ liệu 5 tháng đầu vào</h3> */}
                 <div className="embed-responsive embed-responsive-16by9">
-                  <PolarAreaChart />
+                  {/* <PolarAreaChart /> */}
+                  <img 
+                    src="https://agilearn.vn/wp-content/uploads/2021/02/ban-hang-chuyen-nghiep-02-1.png" 
+                    alt="My Image" 
+                    width="350px" 
+                    height="350px"
+                  />
                 </div>
               </div>
             </div>
             <div className="col-md-12">
               <div className="tile">
-                <h3 className="tile-title">Thống kê 7 tháng doanh thu</h3>
+                {/* <h3 className="tile-title">Thống kê 7 tháng doanh thu</h3> */}
                 <div className="embed-responsive embed-responsive-16by9">
-                  <BarChart />
+                  {/* <BarChart /> */}
+                  <img 
+                    src="https://bizflyportal.mediacdn.vn/thumb_wm/1000,100/bizflyportal/images/cac16195074517363.png"
+                    width="400px" 
+                    height="350px"
+                  />
                 </div>
               </div>
             </div>
