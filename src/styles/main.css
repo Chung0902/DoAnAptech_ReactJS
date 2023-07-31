@@ -710,7 +710,14 @@ fieldset:disabled a.btn {
   height: 33px;
   text-align: center;
 }
-
+.status_or{
+  font-weight: bold;
+  color: rgb(0, 186, 28);
+}
+.totalor{
+  font-weight: bold;
+  color: red;
+}
 
 
 

@@ -59,54 +59,74 @@ const OrderManagement = () => {
                     </th>
                     <th>ID đơn hàng</th>
                     <th>Khách hàng</th>
-                    <th>Đơn hàng</th>
+                    <th>Sản phẩm</th>
                     <th>Số lượng</th>
+                    <th>Giá</th>
                     <th>Tổng tiền</th>
                     <th>Tình trạng</th>
                     <th>Tính năng</th>
                   </tr>
                 </thead>
-                {listorders &&
-                  listorders.map((e) => (
-                    <tbody key={e.order._id}>
-                      {e.orderDetails.map((orderDetail) => (
-                        <tr key={orderDetail.productId}>
-                          <td width="10">
+                <tbody>
+                  {listorders &&
+                    listorders.map((e) => (
+                      <React.Fragment key={e.order._id}>
+                        {/* Hiển thị thông tin khách hàng cho mỗi đơn hàng */}
+                        <tr>
+                          <td rowSpan={e.orderDetails.length + 1}>
                             <input type="checkbox" name="check1" value="1" />
                           </td>
-                          <td>{orderDetail.productId}</td>
-                          <td>
-                            {e.order.customer.firstName}
+                          <td rowSpan={e.orderDetails.length + 1}>
+                            {e.order._id}
+                          </td>
+                          <td rowSpan={e.orderDetails.length + 1}>
+                            {e.order.customer.firstName}{" "}
                             {e.order.customer.lastName}
                           </td>
-                          <td>{orderDetail.productName}</td>
-                          <td>{orderDetail.quantity}</td>
-                          <td>{orderDetail.totalOrderDetailPrice} đ</td>
-                          <td>{e.order.status}</td>
-                          <td>
-                            <button
-                              className="btn btn-primary btn-sm trash"
-                              type="button"
-                              title="Xóa"
-                            >
-                              <i className="fas fa-trash-alt"></i>{" "}
-                            </button>
-                            <button
-                              className="btn btn-primary btn-sm edit"
-                              type="button"
-                              title="Duyệt"
-                              id="show-emp"
-                              data-bs-toggle="modal"
-                              data-bs-target="#ModalUP"
-                            >
-                              <i className="fas fa-edit"></i>
-                              <BrowsOrder />
-                            </button>
-                          </td>
                         </tr>
-                      ))}
-                    </tbody>
-                  ))}
+                        {/* Hiển thị thông tin sản phẩm cho mỗi đơn hàng */}
+                        {e.orderDetails.map((orderDetail) => (
+                          <tr key={orderDetail.productId}>
+                            <td>{orderDetail.productName}</td>
+                            <td>{orderDetail.quantity}</td>
+                            <td>{orderDetail.totalOrderDetailPrice} đ</td>
+                            {e.orderDetails.indexOf(orderDetail) === 0 && (
+                              <td className="totalor" rowSpan={e.orderDetails.length + 1}>
+                                {e.totalOrderPrice} đ
+                              </td>
+                            )}
+                            {e.orderDetails.indexOf(orderDetail) === 0 && (
+                              <td className="status_or" rowSpan={e.orderDetails.length + 1}>
+                                {e.order.status}
+                              </td>
+                            )}
+                            {e.orderDetails.indexOf(orderDetail) === 0 && (
+                              <td rowSpan={e.orderDetails.length + 1}>
+                                <button
+                                  className="btn btn-primary btn-sm trash"
+                                  type="button"
+                                  title="Xóa"
+                                >
+                                  <i className="fas fa-trash-alt"></i>
+                                </button>
+                                <button
+                                  className="btn btn-primary btn-sm edit"
+                                  type="button"
+                                  title="Duyệt"
+                                  id="show-emp"
+                                  data-bs-toggle="modal"
+                                  data-bs-target="#ModalUP"
+                                >
+                                  <i className="fas fa-edit"></i>
+                                  <BrowsOrder />
+                                </button>
+                              </td>
+                            )}
+                          </tr>
+                        ))}
+                      </React.Fragment>
+                    ))}
+                </tbody>
               </table>
             </div>
           </div>

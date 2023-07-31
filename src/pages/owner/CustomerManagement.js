@@ -20,6 +20,14 @@ const CustomerManagement = () => {
     useEffect(() =>{
       getAllCustomer();
     },[]);
+      // Hàm biến đổi định dạng ngày sinh
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear().toString().slice(0);
+    return `${day}/${month}/${year}`;
+  };
   return (
     <main className="app-content">
       <div className="app-title">
@@ -102,7 +110,7 @@ const CustomerManagement = () => {
                         />
                       </td>
                       <td>{c.address}</td>
-                      <td>{c.birthday}</td>
+                      <td>{formatDate(c.birthday)}</td>
                       <td>Nữ</td>
                       <td>{c.phoneNumber}</td>
                     

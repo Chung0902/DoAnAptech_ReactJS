@@ -389,28 +389,36 @@ const RevenueManagement = () => {
                   <tr>
                     <th>ID đơn hàng</th>
                     <th>Khách hàng</th>
-                    <th>Đơn hàng</th>
+                    <th>Sản phẩm</th>
                     <th>Số lượng</th>
-                    <th>Tổng tiền</th>
+                    <th>Giá tiền</th>
                   </tr>
                 </thead>
-                {CompletedOrders &&
-                  CompletedOrders.map((e) => (
-                    <tbody key={e.order._id}>
-                      {e.orderDetails.map((orderDetail) => (
-                        <tr key={orderDetail.productId}>
-                          <td>{orderDetail.productId}</td>
-                          <td>
-                            {e.order.customer.firstName}
+                <tbody>
+                  {CompletedOrders &&
+                    CompletedOrders.map((e) => (
+                      <React.Fragment key={e.order._id}>
+                        {/* Hiển thị thông tin khách hàng cho mỗi đơn hàng */}
+                        <tr>
+                          <td rowSpan={e.orderDetails.length + 1}>
+                            {e.order._id}
+                          </td>
+                          <td rowSpan={e.orderDetails.length + 1}>
+                            {e.order.customer.firstName}{" "}
                             {e.order.customer.lastName}
                           </td>
-                          <td>{orderDetail.productName}</td>
-                          <td>{orderDetail.quantity}</td>
-                          <td>{orderDetail.totalOrderDetailPrice} đ</td>
                         </tr>
-                      ))}
-                    </tbody>
-                  ))}
+                        {/* Hiển thị thông tin sản phẩm cho mỗi đơn hàng */}
+                        {e.orderDetails.map((orderDetail) => (
+                          <tr key={orderDetail.productId}>
+                            <td>{orderDetail.productName}</td>
+                            <td>{orderDetail.quantity}</td>
+                            <td>{orderDetail.totalOrderDetailPrice} đ</td>
+                          </tr>
+                        ))}
+                      </React.Fragment>
+                    ))}
+                </tbody>
                 <tfoot>
                   <tr>
                     <th colSpan="4">Tổng cộng:</th>
