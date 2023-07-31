@@ -61,8 +61,8 @@ const OrderManagement = () => {
                     <th>Khách hàng</th>
                     <th>Sản phẩm</th>
                     <th>Số lượng</th>
-                    <th>Giá</th>
                     <th>Tổng tiền</th>
+                    <th>Tổng cộng</th>
                     <th>Tình trạng</th>
                     <th>Tính năng</th>
                   </tr>
@@ -91,12 +91,18 @@ const OrderManagement = () => {
                             <td>{orderDetail.quantity}</td>
                             <td>{orderDetail.totalOrderDetailPrice} đ</td>
                             {e.orderDetails.indexOf(orderDetail) === 0 && (
-                              <td className="totalor" rowSpan={e.orderDetails.length + 1}>
+                              <td
+                                className="totalor"
+                                rowSpan={e.orderDetails.length + 1}
+                              >
                                 {e.totalOrderPrice} đ
                               </td>
                             )}
                             {e.orderDetails.indexOf(orderDetail) === 0 && (
-                              <td className="status_or" rowSpan={e.orderDetails.length + 1}>
+                              <td
+                                className="status_or"
+                                rowSpan={e.orderDetails.length + 1}
+                              >
                                 {e.order.status}
                               </td>
                             )}

@@ -391,7 +391,7 @@ const RevenueManagement = () => {
                     <th>Khách hàng</th>
                     <th>Sản phẩm</th>
                     <th>Số lượng</th>
-                    <th>Giá tiền</th>
+                    <th>Tổng tiền</th>
                   </tr>
                 </thead>
                 <tbody>
