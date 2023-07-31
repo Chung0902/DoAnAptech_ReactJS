@@ -8,7 +8,7 @@ const ProductsManager = () => {
   
   const getAllProducts = async () => {
     try {
-      const response = await axiosClient.get('admin/products');
+      const response = await axiosClient.get('questions/grossprcate');
       setProducts(response.payload);
       
     } catch (error) {
@@ -103,7 +103,7 @@ const ProductsManager = () => {
                       <span className="badge bg-success">{p.stock > 0 ? 'Còn hàng ': 'Hết hàng'}</span>
                     </td>
                     <td>{p.price} đ</td>
-                    <td>{p.categoryId}</td>
+                    <td>{p.category}</td>
                     <td>
                       <button
                         className="btn btn-primary btn-sm trash"
