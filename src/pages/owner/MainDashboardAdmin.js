@@ -19,6 +19,7 @@ const MainDashboardAdmin = () => {
   const [top5Customers, setTop5Customers] = useState([]);
   const [countNewCustomer, setCountNewCustomer] = useState([]);
   const [bestSellers, setBestSellers] = useState([]);
+  const [revenueData, setRevenueData] = useState([]);
 
   //tổng sản phẩm
   const getGrossProduct = async () => {
@@ -113,7 +114,19 @@ const MainDashboardAdmin = () => {
     }
   };
 
-
+  //Hiển thị doanh thu theo 1 tuần
+  const calculateRevenueInAWeek = async () => {
+    try {
+      const response = await axiosClient.get(
+        "questions/calculateRevenueInAWeek"
+      );
+      if (response && response && response.revenueByDayOfWeek) {
+        setRevenueData(response.revenueByDayOfWeek);
+      }
+    } catch (error) {
+      console.error("Error fetching revenue data:", error);
+    }
+  };
 
   useEffect(() => {
     getGrossProduct();
@@ -124,6 +137,7 @@ const MainDashboardAdmin = () => {
     getTop5Customers();
     getNewCustomer();
     fetchBestSellers();
+    calculateRevenueInAWeek();
   }, []);
 
   return (
@@ -282,24 +296,17 @@ const MainDashboardAdmin = () => {
                 <h3 className="tile-title">Top 5 sản phẩm bán chạy</h3>
                 <div className="embed-responsive embed-responsive-16by9">
                   <PolarAreaChart data={bestSellers} />
-                  {/* <img 
-                    src="https://agilearn.vn/wp-content/uploads/2021/02/ban-hang-chuyen-nghiep-02-1.png" 
-                    alt="My Image" 
-                    width="auto" 
-                    height="350px"
-                  /> */}
                 </div>
               </div>
             </div>
             <div className="col-md-12">
               <div className="tile">
-                {/* <h3 className="tile-title">Thống kê 7 tháng doanh thu</h3> */}
+                <h3 className="tile-title">Thống kê doanh thu trong 1 tuần</h3>
                 <div className="embed-responsive embed-responsive-16by9">
-                  {/* <BarChart /> */}
-                  <img
-                    src="https://bizflyportal.mediacdn.vn/thumb_wm/1000,100/bizflyportal/images/cac16195074517363.png"
-                    width="auto"
-                    height="350px"
+                  {/* Truyền dữ liệu doanh thu vào BarChart */}
+                  <BarChart
+                    weekDays={["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]}
+                    revenueData={revenueData}
                   />
                 </div>
               </div>
