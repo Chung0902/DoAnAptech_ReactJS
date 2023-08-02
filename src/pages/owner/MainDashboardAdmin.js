@@ -18,7 +18,7 @@ const MainDashboardAdmin = () => {
   const [employees, setEmployees] = useState([]);
   const [top5Customers, setTop5Customers] = useState([]);
   const [countNewCustomer, setCountNewCustomer] = useState([]);
-  
+  const [bestSellers, setBestSellers] = useState([]);
 
   //tổng sản phẩm
   const getGrossProduct = async () => {
@@ -34,8 +34,8 @@ const MainDashboardAdmin = () => {
     }
   };
 
-   //tổng đơn hàng
-   const getTotalOrder = async () => {
+  //tổng đơn hàng
+  const getTotalOrder = async () => {
     try {
       const response = await axiosClient.get("questions/totalorder");
       if (response && response.payload) {
@@ -47,20 +47,20 @@ const MainDashboardAdmin = () => {
     }
   };
 
-    //tổng khách hàng
-    const getTotalcustomer = async () => {
-      try {
-        const response = await axiosClient.get("questions/totalcustomer");
-        if (response && response.payload) {
-          const totalcustomer = response.payload.length;
-          setTotalcustomer(totalcustomer);
-        }
-      } catch (error) {
-        console.error(error);
+  //tổng khách hàng
+  const getTotalcustomer = async () => {
+    try {
+      const response = await axiosClient.get("questions/totalcustomer");
+      if (response && response.payload) {
+        const totalcustomer = response.payload.length;
+        setTotalcustomer(totalcustomer);
       }
-    };
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-     //tổng sản phẩm sắp hết hàng
+  //tổng sản phẩm sắp hết hàng
   const getOutStock = async () => {
     try {
       const response = await axiosClient.get("questions/outstock1");
@@ -73,8 +73,8 @@ const MainDashboardAdmin = () => {
     }
   };
 
-   //hiển thị danh sách nhân viên mới
-   const getNewCustomer = async () => {
+  //hiển thị danh sách nhân viên mới
+  const getNewCustomer = async () => {
     try {
       const response = await axiosClient.get("questions/countNewCustomer");
       setCountNewCustomer(response.newCustomer);
@@ -83,15 +83,15 @@ const MainDashboardAdmin = () => {
     }
   };
 
-     //hiển thị danh sách khách hàng mới
-     const getNewEmployees = async () => {
-      try {
-        const response = await axiosClient.get("questions/countNewEmployees");
-        setEmployees(response.newEmployees);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+  //hiển thị danh sách khách hàng mới
+  const getNewEmployees = async () => {
+    try {
+      const response = await axiosClient.get("questions/countNewEmployees");
+      setEmployees(response.newEmployees);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   //hiển thị danh sách top 5 khách hàng mua nhiều nhất
   const getTop5Customers = async () => {
@@ -103,6 +103,17 @@ const MainDashboardAdmin = () => {
     }
   };
 
+  //Kết nối vs PolarAreaChart
+  const fetchBestSellers = async () => {
+    try {
+      const response = await axiosClient.get("questions/bestsellerlist");
+      setBestSellers(response.payload);
+    } catch (error) {
+      console.error("Error fetching best-sellers:", error);
+    }
+  };
+
+
 
   useEffect(() => {
     getGrossProduct();
@@ -112,8 +123,9 @@ const MainDashboardAdmin = () => {
     getNewEmployees();
     getTop5Customers();
     getNewCustomer();
+    fetchBestSellers();
   }, []);
-  
+
   return (
     <main className="app-content">
       <div className="row">
@@ -203,7 +215,9 @@ const MainDashboardAdmin = () => {
             </div>
             <div className="col-md-12">
               <div className="tile">
-                <h3 className="tile-title">Khách hàng có lượt mua nhiều nhất</h3>
+                <h3 className="tile-title">
+                  Khách hàng có lượt mua nhiều nhất
+                </h3>
                 <div>
                   <table className="table table-bordered">
                     <thead>
@@ -215,15 +229,17 @@ const MainDashboardAdmin = () => {
                       </tr>
                     </thead>
                     <tbody>
-                    {top5Customers &&
-                    top5Customers.map((e) => (
-                      <tr key={e.customerId}>
-                        {/* <td>{e.customerId}</td> */}
-                        <td>{e.firstName}{" "}{e.lastName}</td>
-                        <td>{e.totalPurchase}</td>
-                        <td>{e.totalPrice} đ</td>
-                      </tr>
-                    ))}
+                      {top5Customers &&
+                        top5Customers.map((e) => (
+                          <tr key={e.customerId}>
+                            {/* <td>{e.customerId}</td> */}
+                            <td>
+                              {e.firstName} {e.lastName}
+                            </td>
+                            <td>{e.totalPurchase}</td>
+                            <td>{e.totalPrice} đ</td>
+                          </tr>
+                        ))}
                     </tbody>
                   </table>
                 </div>
@@ -234,27 +250,26 @@ const MainDashboardAdmin = () => {
                 <h3 className="tile-title">Khách hàng mới</h3>
                 <div>
                   <table className="table table-bordered">
-                  <thead>
-                  <tr>
-                    <th>Họ và tên</th>
-                    <th>Địa chỉ</th>
-                    <th>SĐT</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {countNewCustomer &&
-                    countNewCustomer.map((e) => (
-                      <tr key={e._id}>
-                        <td>
-                          {e.firstName }{" "}
-                          {e.lastName }
-                        </td>
-                        <td>{e.address} </td>
-                        <td>{e.phoneNumber}</td>
+                    <thead>
+                      <tr>
+                        <th>Họ và tên</th>
+                        <th>Địa chỉ</th>
+                        <th>SĐT</th>
                       </tr>
-                    ))}
-                </tbody>
-              </table>
+                    </thead>
+                    <tbody>
+                      {countNewCustomer &&
+                        countNewCustomer.map((e) => (
+                          <tr key={e._id}>
+                            <td>
+                              {e.firstName} {e.lastName}
+                            </td>
+                            <td>{e.address} </td>
+                            <td>{e.phoneNumber}</td>
+                          </tr>
+                        ))}
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>
@@ -264,15 +279,15 @@ const MainDashboardAdmin = () => {
           <div className="row">
             <div className="col-md-12">
               <div className="tile">
-                {/* <h3 className="tile-title">Dữ liệu 5 tháng đầu vào</h3> */}
+                <h3 className="tile-title">Top 5 sản phẩm bán chạy</h3>
                 <div className="embed-responsive embed-responsive-16by9">
-                  {/* <PolarAreaChart /> */}
-                  <img 
+                  <PolarAreaChart data={bestSellers} />
+                  {/* <img 
                     src="https://agilearn.vn/wp-content/uploads/2021/02/ban-hang-chuyen-nghiep-02-1.png" 
                     alt="My Image" 
                     width="auto" 
                     height="350px"
-                  />
+                  /> */}
                 </div>
               </div>
             </div>
@@ -281,9 +296,9 @@ const MainDashboardAdmin = () => {
                 {/* <h3 className="tile-title">Thống kê 7 tháng doanh thu</h3> */}
                 <div className="embed-responsive embed-responsive-16by9">
                   {/* <BarChart /> */}
-                  <img 
+                  <img
                     src="https://bizflyportal.mediacdn.vn/thumb_wm/1000,100/bizflyportal/images/cac16195074517363.png"
-                    width="auto" 
+                    width="auto"
                     height="350px"
                   />
                 </div>
