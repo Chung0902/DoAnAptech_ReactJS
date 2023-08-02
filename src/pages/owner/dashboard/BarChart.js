@@ -1,58 +1,53 @@
-import React from 'react'
-import {
-    CChart,
-} from "@coreui/react-chartjs";
+import React from "react";
+import { CChart } from "@coreui/react-chartjs";
 
-function getStyle(property) {
-    return getComputedStyle(document.documentElement).getPropertyValue(property);
-  }
+const BarChart = ({ weekDays, revenueData }) => {
+  // Code của thành phần BarChart ở đây
+  // Đảm bảo rằng weekDays và revenueData có giá trị hợp lệ và không rỗng trước khi sử dụng.
 
-const BarChart = () => {
   return (
     <>
-    <CChart
-  type="bar"
-  data={{
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-    datasets: [
-      {
-        label: 'Doanh thu',
-        backgroundColor: '#f87979',
-        data: [40, 20, 12, 39, 10, 40, 39, 80, 40],
-      },
-    ],
-  }}
-  labels="months"
-  options={{
-    plugins: {
-      legend: {
-        labels: {
-        //   color: getStyle('--cui-body-color'),
-        }
-      }
-    },
-    scales: {
-      x: {
-        grid: {
-          color: getStyle('--cui-border-color-translucent'),
-        },
-        ticks: {
-          color: getStyle('--cui-body-color'),
-        },
-      },
-      y: {
-        grid: {
-          color: getStyle('--cui-border-color-translucent'),
-        },
-        ticks: {
-          color: getStyle('--cui-body-color'),
-        },
-      },
-    },
-  }}
-/>
+      <CChart
+        type="bar"
+        data={{
+          labels: weekDays,
+          datasets: [
+            {
+              label: "Doanh thu",
+              backgroundColor: "#f87979",
+              data: revenueData,
+            },
+          ],
+        }}
+        labels="week days"
+        options={{
+          plugins: {
+            legend: {
+              labels: {},
+            },
+          },
+          scales: {
+            x: {
+              grid: {
+                color: "rgba(0, 0, 0, 0.1)",
+              },
+              ticks: {
+                color: "#333",
+              },
+            },
+            y: {
+              grid: {
+                color: "rgba(0, 0, 0, 0.1)",
+              },
+              ticks: {
+                color: "#333",
+              },
+            },
+          },
+        }}
+      />
     </>
-  )
-}
+  );
+};
 
-export default BarChart
+export default BarChart;
