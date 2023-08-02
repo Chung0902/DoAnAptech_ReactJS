@@ -2,15 +2,98 @@ import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import UpdateProduct from "./products/UpdateProduct";
 import axiosClient from "../../libraries/axiosClient";
+import { toast } from "react-hot-toast";
 
 const ProductsManager = () => {
   const [products,setProducts] = useState();
-  
+  const [udescription,setUDescription] = useState();
+  const [uname,setUName] = useState();
+  const [uprice,setUPrice] = useState();
+  const [udiscount,setUDiscount] = useState();
+  const [ustock,setUStock] = useState();
+  const [categoryId,setCategoryId] = useState();
+  const [supplierId,setSupplierId] = useState();
+  const [uphoto,setUPhoto] = useState();
+  const [selected, setSelected] = useState(null);
+  const [reload, setReload] = useState(false);
+  const [productsList, setProductsList] = useState([]);
+
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+    try {
+    
+      const response = await axiosClient.patch(
+        `admin/products/${selected._id}`,
+        {
+          name: uname,
+          price: uprice,
+          discount: udiscount,
+          stock: ustock,
+          photo: uphoto,
+          description: udescription,
+          categoryId: categoryId,
+          supplierId: supplierId
+        }
+      );
+      if (response.success) {
+        toast.success(" is updated");
+        setSelected(null);
+        setUName("");
+        setUPrice("");
+        setUDiscount("");
+        setUDescription("");
+        setUPhoto("");
+        setUStock("");
+        setCategoryId("");
+        setSupplierId("");
+        setProducts(
+          products.map((product) => {
+            if (product._id === selected._id) {
+              return {
+                ...product,
+                name: uname,
+                price: uprice,
+                discount: udiscount,
+                stock: ustock,
+                photo: uphoto,
+                description: udescription,
+                categoryId: categoryId,
+                supplierId: supplierId,
+              }; // Cập nhật tên của danh mục tương ứng
+            }
+            return product;
+          })
+        );
+        getAllProducts();
+      }
+    } catch (error) {
+      console.log(error.message);
+      toast.error("Something went wrong");
+    }
+  };
+
+   //Delete category
+   const handleDelete = async (pId) =>{
+    try {
+        const response = await axiosClient.delete(`admin/products/${pId}`);
+        if(response?.success){
+            toast.success(`category is deleted`);
+            setProducts(products.filter((product) => product._id !== pId)); 
+            // Loại bỏ danh mục đã được xóa khỏi danh sách
+          //   setProductsList(productsList.filter((product) => product._id !== pId)); 
+          // setReload(prev => !prev); // Tải lại danh sách sản phẩm từ server
+            
+        }
+        
+    } catch (error) {
+        toast.error('Something went wrong')
+    }
+};
   const getAllProducts = async () => {
     try {
       const response = await axiosClient.get('questions/grossprcate');
       setProducts(response.payload);
-      
+      // setProductsList(response.payload);
     } catch (error) {
       console.error(error);
     }
@@ -109,7 +192,7 @@ const ProductsManager = () => {
                         className="btn btn-primary btn-sm trash"
                         type="button"
                         title="Xóa"
-                        onclick="myFunction(this)"
+                        onClick={() => { handleDelete(p._id)}}
                       >
                         <i className="fas fa-trash-alt"></i>
                       </button>
@@ -120,11 +203,22 @@ const ProductsManager = () => {
                         id="show-emp"
                         data-bs-toggle="modal"
                         data-bs-target="#ModalUP"
+                        onClick={() => {
+                          setSelected(p);
+                          setUName(p.name);
+                          setUDescription(p.description);
+                          setUPrice(p.price);
+                          setUStock(p.stock);
+                          setUDiscount(p.discount);
+                          setUPhoto(p.photo);
+                          setCategoryId(p.category);
+                          setSupplierId(p.supplierId)
+                        }}
                       >
                         <i className="fas fa-edit"></i>
-                        <UpdateProduct/>
                       </button>
-                    </td>
+                      <UpdateProduct handleSubmit={handleUpdate} name={uname} description={udescription} price={uprice} stock={ustock} photo={uphoto} discount={udiscount} setName={setUName} setDescription={setUDescription} setDiscount={setUDiscount} setPrice={setUPrice} setPhoto={setUPhoto} setStock={setUStock} setCategoryId={setCategoryId} setSupplierId={setSupplierId}  />
+                    </td> 
                   </tr>
                   ))}
                 </tbody>
