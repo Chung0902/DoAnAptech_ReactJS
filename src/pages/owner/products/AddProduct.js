@@ -2,8 +2,92 @@ import React from "react";
 import AddSuppliers from "./AddSuppliers";
 import AddCategories from "../categories/AddCategories";
 import AddStatus from "./AddStatus";
+import { useState } from "react";
+import axiosClient from "../../../libraries/axiosClient";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 const AddProduct = () => {
+  const [products,setProducts]= useState([]);
+  const [categories,setCategories]= useState([]);
+  const [suppliers,setSuppliers]= useState([]);
+  const [name,setName] = useState();
+  const [description,setDescription] = useState();
+  const [price,setPrice] = useState();
+  const [discount,setDiscount] = useState();
+  const [stock,setStock] = useState();
+  const [categoryId,setCategoryId] = useState();
+  const [supplierId,setSupplierId] = useState();
+  const [photo,setPhoto] = useState();
+  const navigate = useNavigate();
+  const [subphoto, setSubphoto] = useState([]);
+
+  const handleAddSubphoto = () => {
+    const newSubphotos = [...subphoto, ''];
+    setSubphoto(newSubphotos);
+  };
+
+  const handleSubphotoChange = (index, value) => {
+    const newSubphotos = [...subphoto];
+    newSubphotos[index] = value;
+    setSubphoto(newSubphotos);
+  };
+
+
+  const handleSubmit = async (e) =>{
+    e.preventDefault();
+    try {
+      const response = await axiosClient.post("admin/products", { name, description,price,discount,stock,categoryId,supplierId,photo,subphoto });
+      console.log(response.payload)
+      if (response?.payload) {
+        toast.success(response.message);
+         console.log(response.message)
+        // setName(response.payload);
+        setProducts([...products, response.payload]); // Thêm danh mục mới vào danh sách
+        navigate('/main/productsmanager')
+      } 
+      console.log(subphoto);
+    } catch (error) {
+      console.log(error);
+      toast.error("Something went wrong in input form");
+    }
+  };
+
+  const getAllSuppliers = async () => {
+    try {
+      const response = await axiosClient.get('admin/suppliers');
+      if(response?.payload){
+        setSuppliers(response.payload);
+      }else{
+        alert('khong co du lieu!')
+      }
+      
+      
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const getAllCategories = async () => {
+    try {
+      const response = await axiosClient.get('admin/categories');
+      if(response?.payload){
+        setCategories(response.payload);
+      }else{
+        alert('khong co du lieu!')
+      }
+      
+      
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+    useEffect(() =>{
+      getAllCategories();
+      getAllSuppliers();
+    },[]);
   return (
     <main className="app-content">
       <div className="app-title">
@@ -52,73 +136,101 @@ const AddProduct = () => {
                   >
                     <i className="fas fa-folder-plus"></i> Thêm trạng thái
                   </button>
-                  <AddStatus/>
+                  <AddStatus />
                 </div>
               </div>
-              <form className="row">
-                <div className="form-group col-md-3">
-                  <label className="control-label">Mã sản phẩm </label>
-                  <input
-                    className="form-control"
-                    type="number"
-                    placeholder=""
-                  />
-                </div>
+              <form className="row" onSubmit={handleSubmit}>
                 <div className="form-group col-md-3">
                   <label className="control-label">Tên sản phẩm</label>
-                  <input className="form-control" type="text" />
+                  <input
+                    className="form-control"
+                    type="text"
+                    required
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                  />
                 </div>
 
                 <div className="form-group  col-md-3">
                   <label className="control-label">Số lượng</label>
-                  <input className="form-control" type="number" />
+                  <input
+                    className="form-control"
+                    type="number"
+                    required
+                    value={stock}
+                    onChange={(e) => setStock(e.target.value)}
+                  />
                 </div>
-                <div className="form-group col-md-3 ">
-                  <label for="exampleSelect1" className="control-label">
-                    Trạng thái
-                  </label>
-                  <select className="form-control" id="exampleSelect1">
-                    <option>-- Chọn tình trạng --</option>
-                    <option>Còn hàng</option>
-                    <option>Hết hàng</option>
-                  </select>
+                <div className="form-group  col-md-3">
+                  <label className="control-label">Image</label>
+                  <input
+                    className="form-control"
+                    type="text"
+                    required
+                    value={photo}
+                    onChange={(e) => setPhoto(e.target.value)}
+                  />
                 </div>
                 <div className="form-group col-md-3">
                   <label for="exampleSelect1" className="control-label">
                     Danh mục
                   </label>
-                  <select className="form-control" id="exampleSelect1">
+                  <select
+                    className="form-control"
+                    id="exampleSelect1"
+                    required
+                    onChange={(event) => {
+                      setCategoryId(event.target.value);
+                    }}
+                  >
                     <option>-- Chọn danh mục --</option>
-                    <option>Bàn ăn</option>
-                    <option>Bàn thông minh</option>
-                    <option>Tủ</option>
-                    <option>Ghế gỗ</option>
-                    <option>Ghế sắt</option>
-                    <option>Giường người lớn</option>
-                    <option>Giường trẻ em</option>
-                    <option>Bàn trang điểm</option>
-                    <option>Giá đỡ</option>
+                    {categories &&
+                      categories?.map((c) => (
+                        <option key={c._id} value={c._id}>
+                          {c.name}
+                        </option>
+                      ))}
                   </select>
                 </div>
                 <div className="form-group col-md-3 ">
                   <label for="exampleSelect1" className="control-label">
                     Nhà cung cấp
                   </label>
-                  <select className="form-control" id="exampleSelect1">
+                  <select
+                    className="form-control"
+                    id="exampleSelect1"
+                    required
+                    onChange={(event) => {
+                      setSupplierId(event.target.value);
+                    }}
+                  >
                     <option>-- Chọn nhà cung cấp --</option>
-                    <option>Phong vũ</option>
-                    <option>Thế giới di động</option>
-                    <option>FPT</option>
-                    <option>Võ Trường</option>
+                    {suppliers &&
+                      suppliers?.map((s) => (
+                        <option key={s._id} value={s._id}>
+                          {s.name}
+                        </option>
+                      ))}
                   </select>
                 </div>
                 <div className="form-group col-md-3">
                   <label className="control-label">Giá bán</label>
-                  <input className="form-control" type="text" />
+                  <input
+                    className="form-control"
+                    type="text"
+                    required
+                    value={price}
+                    onChange={(e) => setPrice(e.target.value)}
+                  />
                 </div>
                 <div className="form-group col-md-3">
-                  <label className="control-label">Giá vốn</label>
-                  <input className="form-control" type="text" />
+                  <label className="control-label">Giảm giá</label>
+                  <input
+                    className="form-control"
+                    type="text"
+                    value={discount}
+                    onChange={(e) => setDiscount(e.target.value)}
+                  />
                 </div>
                 <div className="form-group col-md-12">
                   <label className="control-label">Mô tả sản phẩm</label>
@@ -126,27 +238,37 @@ const AddProduct = () => {
                     className="form-control"
                     name="mota"
                     id="mota"
-                  ></textarea>
+                    onChange={(e) => setDescription(e.target.value)}
+                  >
+                    {description}
+                  </textarea>
                 </div>
                 <div className="form-group col-md-12">
-                  <label className="control-label">Ảnh sản phẩm</label>
-                  <div id="myfileupload">
-                    <input
-                      type="file"
-                      id="uploadfile"
-                      name="ImageUpload"
-                      onchange="readURL(this);"
-                    />
-                  </div>
+                  <label className="control-label">Hình ảnh phụ:</label>
+                  {subphoto.map((subphoto, index) => (
+                    <div key={index}>
+                      <input
+                        className="form-control"
+                        type="text"
+                        value={subphoto}
+                        onChange={(event) =>
+                          handleSubphotoChange(index, event.target.value)
+                        }
+                      />
+                    </div>
+                  ))}
+                  <button type="button" onClick={handleAddSubphoto}>
+                    Thêm hình ảnh
+                  </button>
                 </div>
+                <button className="btn btn-info" type="submit">
+                  Lưu lại
+                </button>
+                <a className="btn btn-danger" href="table-data-product.html">
+                  Hủy bỏ
+                </a>
               </form>
             </div>
-            <button className="btn btn-save" type="button">
-              Lưu lại
-            </button>
-            <a className="btn btn-cancel" href="table-data-product.html">
-              Hủy bỏ
-            </a>
           </div>
         </div>
       </div>

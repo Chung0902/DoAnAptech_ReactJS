@@ -9,16 +9,7 @@ import { useAuth } from "../../context/auth";
 
 const EmployeeManager = () => {
   const [employees, setEmployees] = useState([]);
-  const [firstName, setFirstName] = useState();
-  const [birthday, setBirthday] = useState();
-  const [address, setAddress] = useState();
-  const [lastName, setLastName] = useState();
-  const [phoneNumber, setPhoneNumber] = useState();
-  const [email, setEmail] = useState();
-  const [sex, setSex] = useState();
   const [role, setRole] = useState();
-  const [question, setQuestion] = useState();
-  const [password, setPassword] = useState();
   const [visible, setVisible] = useState(false);
   const [selected, setSelected] = useState(null);
   const [updateFirstName, setUpdateFirstName] = useState();
