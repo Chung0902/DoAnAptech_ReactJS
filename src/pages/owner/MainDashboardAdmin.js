@@ -17,6 +17,8 @@ const MainDashboardAdmin = () => {
   const [outstock, setOutstock] = useState(0);
   const [employees, setEmployees] = useState([]);
   const [top5Customers, setTop5Customers] = useState([]);
+  const [countNewCustomer, setCountNewCustomer] = useState([]);
+  
 
   //tổng sản phẩm
   const getGrossProduct = async () => {
@@ -72,14 +74,24 @@ const MainDashboardAdmin = () => {
   };
 
    //hiển thị danh sách nhân viên mới
-   const getNewEmployees = async () => {
+   const getNewCustomer = async () => {
     try {
-      const response = await axiosClient.get("questions/countNewEmployees");
-      setEmployees(response.newEmployees);
+      const response = await axiosClient.get("questions/countNewCustomer");
+      setCountNewCustomer(response.newCustomer);
     } catch (error) {
       console.error(error);
     }
   };
+
+     //hiển thị danh sách khách hàng mới
+     const getNewEmployees = async () => {
+      try {
+        const response = await axiosClient.get("questions/countNewEmployees");
+        setEmployees(response.newEmployees);
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
   //hiển thị danh sách top 5 khách hàng mua nhiều nhất
   const getTop5Customers = async () => {
@@ -99,6 +111,7 @@ const MainDashboardAdmin = () => {
     getOutStock();
     getNewEmployees();
     getTop5Customers();
+    getNewCustomer();
   }, []);
   
   return (
@@ -195,7 +208,7 @@ const MainDashboardAdmin = () => {
                   <table className="table table-bordered">
                     <thead>
                       <tr>
-                        <th>ID khách hàng</th>
+                        {/* <th>ID khách hàng</th> */}
                         <th>Tên khách hàng</th>
                         <th>Số lượt mua</th>
                         <th>Tổng tiền</th>
@@ -205,7 +218,7 @@ const MainDashboardAdmin = () => {
                     {top5Customers &&
                     top5Customers.map((e) => (
                       <tr key={e.customerId}>
-                        <td>{e.customerId}</td>
+                        {/* <td>{e.customerId}</td> */}
                         <td>{e.firstName}{" "}{e.lastName}</td>
                         <td>{e.totalPurchase}</td>
                         <td>{e.totalPrice} đ</td>
@@ -229,8 +242,8 @@ const MainDashboardAdmin = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {employees &&
-                    employees.map((e) => (
+                  {countNewCustomer &&
+                    countNewCustomer.map((e) => (
                       <tr key={e._id}>
                         <td>
                           {e.firstName }{" "}
@@ -257,7 +270,7 @@ const MainDashboardAdmin = () => {
                   <img 
                     src="https://agilearn.vn/wp-content/uploads/2021/02/ban-hang-chuyen-nghiep-02-1.png" 
                     alt="My Image" 
-                    width="350px" 
+                    width="auto" 
                     height="350px"
                   />
                 </div>
@@ -270,7 +283,7 @@ const MainDashboardAdmin = () => {
                   {/* <BarChart /> */}
                   <img 
                     src="https://bizflyportal.mediacdn.vn/thumb_wm/1000,100/bizflyportal/images/cac16195074517363.png"
-                    width="400px" 
+                    width="auto" 
                     height="350px"
                   />
                 </div>
