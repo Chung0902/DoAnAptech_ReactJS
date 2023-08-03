@@ -1,65 +1,109 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axiosClient from './../../libraries/axiosClient';
+import { toast } from "react-hot-toast";
+import { useAuth } from "../../context/auth";
 
 const ProfileManager = () => {
+     //context
+     const [auth,setAuth] = useAuth();
+     //state
+     const [firstName,setFirstName]= useState("")
+     const [lastName,setLastName]= useState("")
+     const [email,setEmail]= useState("")
+     const [password,setPassword]= useState("")
+     const [phoneNumber,setPhoneNumber]= useState("")
+     const [address,setAddress]= useState("")
+     //const [question,setQuestion]= useState("")
+ 
+     //get user data
+     useEffect(() =>{
+         const {email,firstName,lastName,phoneNumber,address,}= auth?.user;
+         setFirstName(firstName);
+         setLastName(lastName)
+         setPhoneNumber(phoneNumber);
+         setEmail(email);
+         setAddress(address);
+     },[auth?.user])
+ 
+     //form function
+     const handleSubmit = async (e) => {
+         e.preventDefault()
+         if (!firstName || !lastName || !email || !password) {
+          toast.error("Please fill in all required fields");
+          return;
+        }
+      
+        try {
+          const response = await axiosClient.put("admin/employees/profile", {
+            firstName,
+            lastName,
+            email,
+            password,
+            phoneNumber,
+            address,
+          });
+      
+          if (response?.error) {
+            toast.error(response?.error);
+          } else {
+            setAuth({ ...auth, user: response?.updatedUser });
+            let ls = JSON.parse(localStorage.getItem("auth")) || {};
+            ls.user = response.updatedUser;
+            localStorage.setItem("auth", JSON.stringify(ls));
+            toast.success("Profile updated successfully");
+          }
+        } catch (error) {
+          console.log(error);
+          toast.error("Something went wrong");
+        }
+     };
   return (
     <main className="app-content">
       <div className="row">
         <div className="col-md-12">
           <div className="tile">
             <h3 className="tile-title">Thông tin cá nhân</h3>
-            <div className="tile-body">
-              <form className="row">
-                <div className="form-group col-md-4">
-                  <label className="control-label">ID nhân viên</label>
-                  <input className="form-control" type="text" />
+            <div className="tile-body row">
+              <form className="row col-md-6 ms-2" onSubmit={handleSubmit}>
+                <div className="form-group col-md-12">
+                  <label className="control-label">Họ</label>
+                  <input className="form-control" type="text" value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)} />
                 </div>
-                <div className="form-group col-md-4">
-                  <label className="control-label">Họ và tên</label>
-                  <input className="form-control" type="text" required />
+                <div className="form-group col-md-12">
+                  <label className="control-label">Tên</label>
+                  <input className="form-control" type="text"  value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}/>
                 </div>
-                <div className="form-group col-md-4">
+                <div className="form-group col-md-12">
                   <label className="control-label">Địa chỉ email</label>
-                  <input className="form-control" type="text" required />
+                  <input className="form-control" type="text"  value={email}
+                    onChange={(e) => setEmail(e.target.value)} disabled/>
                 </div>
-                <div className="form-group col-md-4">
+                <div className="form-group col-md-12">
                   <label className="control-label">Địa chỉ thường trú</label>
-                  <input className="form-control" type="text" required />
+                  <input className="form-control" type="text"  value={address}
+                    onChange={(e) => setAddress(e.target.value)}/>
                 </div>
-                <div className="form-group  col-md-4">
+                <div className="form-group  col-md-12">
                   <label className="control-label">Số điện thoại</label>
-                  <input className="form-control" type="number" required />
+                  <input className="form-control" type="number"  value={phoneNumber}
+                    onChange={(e) => setPhoneNumber(e.target.value)}/>
                 </div>
-                <div className="form-group col-md-4">
-                  <label className="control-label">Ngày sinh</label>
-                  <input className="form-control" type="date" />
+                <div className="form-group  col-md-12">
+                  <label className="control-label">Mật khẩu</label>
+                  <input className="form-control" type="password"  value={password}
+                    onChange={(e) => setPassword(e.target.value)} />
                 </div>
-                <div className="form-group  col-md-3">
-                  <label className="control-label">Nơi sinh</label>
-                  <input className="form-control" type="text" required />
-                </div>
-                <div className="form-group col-md-3">
-                  <label className="control-label">Số CMND</label>
-                  <input className="form-control" type="number" required />
-                </div>
-                <div className="form-group col-md-3">
-                  <label className="control-label">Ngày cấp</label>
-                  <input className="form-control" type="date" required />
-                </div>
-                <div className="form-group col-md-3">
-                  <label className="control-label">Nơi cấp</label>
-                  <input className="form-control" type="text" required />
-                </div>
-                <div className="form-group col-md-3">
-                  <label className="control-label">Giới tính</label>
-                  <select className="form-control" id="exampleSelect2" required>
-                    <option>-- Chọn giới tính --</option>
-                    <option>Nam</option>
-                    <option>Nữ</option>
-                  </select>
-                </div>
+                <button className="btn btn-info mb-3 ms-5" type="submit">
+                  Lưu lại
+                </button>
               </form>
+              <div className="col-md-5 shadow ms-5 border border-info">
+                <img src="https://static.vecteezy.com/system/resources/previews/018/989/610/original/a-man-finishes-work-on-deadline-flat-cartoon-illustration-of-enterprising-man-working-on-laptop-vector.jpg" width="100%" className="mt-5"/>
+              </div>
 
-              <div className="form-group  col-md-3">
+              {/* <div className="form-group  col-md-3">
                 <label for="exampleSelect1" className="control-label">
                   Chức vụ
                 </label>
@@ -87,14 +131,9 @@ const ProfileManager = () => {
                     onchange="readURL(this);"
                   />
                 </div>
-              </div>
+              </div> */}
             </div>
-            <button className="btn btn-save" type="button">
-              Lưu lại
-            </button>
-            <a className="btn btn-cancel" href="/doc/table-data-table.html">
-              Hủy bỏ
-            </a>
+            
           </div>
         </div>
       </div>
