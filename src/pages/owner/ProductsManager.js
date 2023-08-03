@@ -17,7 +17,45 @@ const ProductsManager = () => {
   const [selected, setSelected] = useState(null);
   const [reload, setReload] = useState(false);
   const [productsList, setProductsList] = useState([]);
+  const [checkedItems, setCheckedItems] = useState({});
 
+  //xử lý chọn vào checkbox lấy id
+  const handleItemCheck = (event, productId) => {
+    const isChecked = event.target.checked;
+    setCheckedItems({
+      ...checkedItems,
+      [productId]: isChecked,
+    });
+  };
+
+  // xử lý nhấn chọn tất cả checkbox
+  const handleSelectAll = (event) => {
+    const isChecked = event.target.checked;
+    const newCheckedItems = {};
+  
+    products.forEach((product) => {
+      newCheckedItems[product._id] = isChecked;
+    });
+  
+    setCheckedItems(newCheckedItems);
+  };
+  //click nút ẩn sẽ ẩn đi
+  const handleDeleteSelected = async () => {
+    const selectedIds = Object.keys(checkedItems).filter(
+      (itemId) => checkedItems[itemId]
+    );
+  
+    try {
+      await axiosClient.post(`admin/products/${selectedIds.join(',')}/delete`);
+  
+      setCheckedItems({});
+      setProducts(products.filter((product) => !selectedIds.includes(product._id)));
+      toast.success("Đã xóa sản phẩm");
+    } catch (error) {
+      console.error(error);
+      toast.error("Có lỗi xảy ra khi xóa sản phẩm");
+    }
+  };
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
@@ -140,7 +178,7 @@ const ProductsManager = () => {
                     className="btn btn-delete btn-sm"
                     type="button"
                     title="Xóa"
-                    onclick="myFunction(this)"
+                    onClick={handleDeleteSelected}
                   >
                     <i className="fas fa-trash-alt"></i> Xóa tất cả{" "}
                   </a>
@@ -153,7 +191,7 @@ const ProductsManager = () => {
                 <thead>
                   <tr>
                     <th width="10">
-                      <input type="checkbox" id="all" />
+                      <input type="checkbox" id="all" onChange={handleSelectAll}  />
                     </th>
                     <th>Mã sản phẩm</th>
                     <th>Tên sản phẩm</th>
@@ -169,7 +207,8 @@ const ProductsManager = () => {
                   {products && products.map((p)=>(
                   <tr key={p._id}>
                     <td width="10">
-                      <input type="checkbox" name="check1" value="1" />
+                      <input type="checkbox" checked={checkedItems[p._id] || false}
+  onChange={(e) => handleItemCheck(e, p._id)} />
                     </td>
                     <td>{p._id}</td>
                     <td>{p.name}</td>
