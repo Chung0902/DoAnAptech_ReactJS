@@ -17,6 +17,7 @@ const Layout = () => {
       token: "",
     });
     localStorage.removeItem("auth");
+    
   };
   return (
     <>
