@@ -48,6 +48,7 @@ const OrderManagement = () => {
                   </a>
                 </div>
               </div>
+              <div className="tile-body">
               <table
                 className="table table-hover table-bordered"
                 id="sampleTable"
@@ -109,13 +110,6 @@ const OrderManagement = () => {
                             {e.orderDetails.indexOf(orderDetail) === 0 && (
                               <td rowSpan={e.orderDetails.length + 1}>
                                 <button
-                                  className="btn btn-primary btn-sm trash"
-                                  type="button"
-                                  title="Xóa"
-                                >
-                                  <i className="fas fa-trash-alt"></i>
-                                </button>
-                                <button
                                   className="btn btn-primary btn-sm edit"
                                   type="button"
                                   title="Duyệt"
@@ -134,6 +128,7 @@ const OrderManagement = () => {
                     ))}
                 </tbody>
               </table>
+              </div>
             </div>
           </div>
         </div>
