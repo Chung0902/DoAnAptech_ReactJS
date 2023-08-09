@@ -5,7 +5,7 @@ import axiosClient from "../../libraries/axiosClient";
 import { toast } from "react-hot-toast";
 
 const ProductsManager = () => {
-  const [products,setProducts] = useState();
+  const [products,setProducts] = useState([]);
   const [udescription,setUDescription] = useState();
   const [uname,setUName] = useState();
   const [uprice,setUPrice] = useState();
@@ -15,9 +15,24 @@ const ProductsManager = () => {
   const [supplierId,setSupplierId] = useState();
   const [uphoto,setUPhoto] = useState();
   const [selected, setSelected] = useState(null);
-  const [reload, setReload] = useState(false);
-  const [productsList, setProductsList] = useState([]);
+ 
   const [checkedItems, setCheckedItems] = useState({});
+  const [searchTerm, setSearchTerm] = useState('');
+
+ 
+     //search
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axiosClient.get(`questions/productSearchb?name=${searchTerm}`);
+      console.log(response.payload);
+      if (response?.payload)
+        setProducts(response?.payload); // Cập nhật state products với kết quả tìm kiếm
+    
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   //xử lý chọn vào checkbox lấy id
   const handleItemCheck = (event, productId) => {
@@ -141,6 +156,7 @@ const ProductsManager = () => {
       getAllProducts();
     },[]);
 
+
   return (
     <main className="app-content">
       <div className="app-title">
@@ -184,8 +200,9 @@ const ProductsManager = () => {
                   </a>
                 </div>
                 <div className="col-sm-7">
-                  <form className="d-flex " role="search">
-                    <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                  <form className="d-flex " role="search" onSubmit={handleSearch}>
+                    <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)} />
                     <button className="btn btn-info" type="submit">Search</button>
                   </form>
                 </div>

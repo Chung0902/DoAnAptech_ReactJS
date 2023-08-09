@@ -18,6 +18,45 @@ const EmployeeManager = () => {
   const [updateEmail, setUpdateEmail] = useState();
   const [updateAddress, setUpdateAddress] = useState();
   const [auth, setAuth] = useAuth();
+  const [checkedItems, setCheckedItems] = useState({});
+
+  //xử lý chọn vào checkbox lấy id
+  const handleItemCheck = (event, employeeId) => {
+    const isChecked = event.target.checked;
+    setCheckedItems({
+      ...checkedItems,
+      [employeeId]: isChecked,
+    });
+  };
+
+  // xử lý nhấn chọn tất cả checkbox
+  const handleSelectAll = (event) => {
+    const isChecked = event.target.checked;
+    const newCheckedItems = {};
+  
+    employees.forEach((product) => {
+      newCheckedItems[product._id] = isChecked;
+    });
+  
+    setCheckedItems(newCheckedItems);
+  };
+  //click nút ẩn sẽ ẩn đi
+  const handleDeleteSelected = async () => {
+    const selectedIds = Object.keys(checkedItems).filter(
+      (itemId) => checkedItems[itemId]
+    );
+  
+    try {
+      //await axiosClient.post(`admin/products/${selectedIds.join(',')}/delete`);
+      await axiosClient.post('admin/employees/delete', { selectedIds });
+      setCheckedItems({});
+      setEmployees(employees.filter((employee) => !selectedIds.includes(employee._id)));
+      toast.success("Đã xóa sản phẩm");
+    } catch (error) {
+      console.error(error);
+      toast.error("Có lỗi xảy ra khi xóa sản phẩm");
+    }
+  };
 
   const handleRoleChange = (event) => {
     const selectedRole = event.target.value;
@@ -160,7 +199,7 @@ const EmployeeManager = () => {
                   </NavLink>
                 </div>
                 <div className="col-sm-2">
-                  <a className="btn btn-delete btn-sm">
+                  <a className="btn btn-delete btn-sm" onClick={handleDeleteSelected}>
                     <i className="fas fa-trash-alt"></i> Xóa tất cả{" "}
                   </a>
                 </div>
@@ -175,7 +214,7 @@ const EmployeeManager = () => {
                 <thead>
                   <tr>
                     <th width="10">
-                      <input type="checkbox" id="all" />
+                      <input type="checkbox" id="all" onChange={handleSelectAll}/>
                     </th>
                     <th>ID nhân viên</th>
                     <th width="150">Họ và tên</th>
@@ -194,7 +233,8 @@ const EmployeeManager = () => {
                       e.role !== 1 ? (
                         <tr key={e._id}>
                           <td width="10">
-                            <input type="checkbox" name="check1" value="1" />
+                            <input type="checkbox" name="check1" checked={checkedItems[e._id] || false}
+  onChange={(e) => handleItemCheck(e, e._id)}/>
                           </td>
                           <td>{e._id}</td>
                           <td>

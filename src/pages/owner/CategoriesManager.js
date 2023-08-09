@@ -5,7 +5,7 @@ import { toast } from "react-hot-toast";
 
 const CategoriesManager = () => {
   const [categories,setCategories]= useState([]);
-  
+  const [photo,setPhoto]=useState("")
   const [name,setName] = useState("")
   const [visible,setVisible]= useState(false)
   const [selected,setSelected] = useState(null)
@@ -14,11 +14,12 @@ const CategoriesManager = () => {
   const handleSubmit = async (e) =>{
     e.preventDefault();
     try {
-      const response = await axiosClient.post("admin/categories", { name });
+      const response = await axiosClient.post("admin/categories", { name, photo });
       if (response?.payload) {
         toast.success(response.message);
         console.log(response.message)
-        setName(response.payload);
+        setName();
+        setPhoto();
         setCategories([...categories, response.payload]); // Thêm danh mục mới vào danh sách
       } 
     } catch (error) {
@@ -95,6 +96,15 @@ const handleUpdate = async (e) =>{
                 placeholder="Nhập danh mục mới"
                 value = {name}
                 onChange={(e)=> setName(e.target.value)} 
+              />
+            </div>
+            <div className="mb-3">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="image"
+                value = {photo}
+                onChange={(e)=> setPhoto(e.target.value)} 
               />
             </div>
             <button type="submit" className="btn btn-primary btn-submit">
