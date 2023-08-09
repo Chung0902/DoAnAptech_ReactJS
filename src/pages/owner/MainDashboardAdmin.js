@@ -301,7 +301,7 @@ const MainDashboardAdmin = () => {
             </div>
             <div className="col-md-12">
               <div className="tile">
-                <h3 className="tile-title">Thống kê doanh thu trong 1 tuần</h3>
+                <h3 className="tile-title">Thống kê doanh thu theo ngày trong 1 tuần</h3>
                 <div className="embed-responsive embed-responsive-16by9">
                   {/* Truyền dữ liệu doanh thu vào BarChart */}
                   <BarChart

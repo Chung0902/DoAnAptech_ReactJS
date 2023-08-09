@@ -413,7 +413,7 @@ const RevenueManagement = () => {
                           <tr key={orderDetail.productId}>
                             <td>{orderDetail.productName}</td>
                             <td>{orderDetail.quantity}</td>
-                            <td>{e.totalOrderPriceWithShipping} đ</td>
+                            <td>{orderDetail.totalOrderDetailPrice} đ</td>
                           </tr>
                         ))}
                       </React.Fragment>

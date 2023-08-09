@@ -90,7 +90,7 @@ const OrderManagement = () => {
                           <tr key={orderDetail.productId}>
                             <td>{orderDetail.productName}</td>
                             <td>{orderDetail.quantity}</td>
-                            <td>{orderDetail.totalOrderDetailPrice} đ</td>
+                            <td>{e.totalamountdiscount} đ</td>
                             {e.orderDetails.indexOf(orderDetail) === 0 && (
                               <td
                                 className="totalor"
