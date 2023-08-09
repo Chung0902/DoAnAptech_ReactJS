@@ -114,19 +114,23 @@ const MainDashboardAdmin = () => {
     }
   };
 
-  //Hiển thị doanh thu theo 1 tuần
-  const calculateRevenueInAWeek = async () => {
-    try {
-      const response = await axiosClient.get(
-        "questions/calculateRevenueInAWeek"
-      );
-      if (response && response && response.revenueByDayOfWeek) {
-        setRevenueData(response.revenueByDayOfWeek);
-      }
-    } catch (error) {
-      console.error("Error fetching revenue data:", error);
+ // Hiển thị doanh thu theo 1 tuần hiện tại
+ const calculateRevenueInAWeek = async () => {
+  try {
+    const response = await axiosClient.get(
+      "questions/calculateRevenueInAWeek"
+    );
+    if (response && response.weeklyRevenue) {
+      const formattedRevenueData = Object.keys(response.weeklyRevenue).map(date => ({
+        date: date,
+        totalRevenue: response.weeklyRevenue[date].totalRevenue
+      }));
+      setRevenueData(formattedRevenueData); // Cập nhật dữ liệu doanh thu vào biến state
     }
-  };
+  } catch (error) {
+    console.error("Error fetching revenue data:", error);
+  }
+};
 
   useEffect(() => {
     getGrossProduct();
@@ -301,7 +305,7 @@ const MainDashboardAdmin = () => {
             </div>
             <div className="col-md-12">
               <div className="tile">
-                <h3 className="tile-title">Thống kê doanh thu theo ngày trong 1 tuần</h3>
+                <h3 className="tile-title">Thống kê doanh thu theo ngày trong 1 tuần hiện tại</h3>
                 <div className="embed-responsive embed-responsive-16by9">
                   {/* Truyền dữ liệu doanh thu vào BarChart */}
                   <BarChart

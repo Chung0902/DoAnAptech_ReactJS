@@ -7,7 +7,7 @@ const BarChart = ({ weekDays, revenueData }) => {
 
   return (
     <>
-      <CChart
+       <CChart
         type="bar"
         data={{
           labels: weekDays,
@@ -15,7 +15,7 @@ const BarChart = ({ weekDays, revenueData }) => {
             {
               label: "Doanh thu",
               backgroundColor: "#f87979",
-              data: revenueData,
+              data: revenueData.map(dayData => dayData.totalRevenue), // Lấy totalRevenue từ mảng revenueData
             },
           ],
         }}
