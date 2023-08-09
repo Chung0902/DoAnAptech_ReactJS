@@ -46,8 +46,8 @@ const ProductsManager = () => {
     );
   
     try {
-      await axiosClient.post(`admin/products/${selectedIds.join(',')}/delete`);
-  
+      //await axiosClient.post(`admin/products/${selectedIds.join(',')}/delete`);
+      await axiosClient.post('admin/products/delete', { selectedIds });
       setCheckedItems({});
       setProducts(products.filter((product) => !selectedIds.includes(product._id)));
       toast.success("Đã xóa sản phẩm");
@@ -183,6 +183,13 @@ const ProductsManager = () => {
                     <i className="fas fa-trash-alt"></i> Xóa tất cả{" "}
                   </a>
                 </div>
+                <div className="col-sm-7">
+                  <form className="d-flex " role="search">
+                    <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                    <button className="btn btn-info" type="submit">Search</button>
+                  </form>
+                </div>
+
               </div>
               <table
                 className="table table-hover table-bordered"
