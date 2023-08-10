@@ -652,9 +652,8 @@ fieldset:disabled a.btn {
   border-color: none;
   /* border-top-left-radius: 10px !important; */
   /* border-bottom-right-radius: 10px !important; */
-  border-radius: .357rem;
   border: none;
-  font-weight: 600;
+  font-weight: bold;
 }
 
 
@@ -668,10 +667,10 @@ fieldset:disabled a.btn {
 .btn-cancel{
   background-color: red;
   color: white;
+  border-color: none;
   /* width: 100px; */
   font-weight: bold;
-  letter-spacing: 1px;
-  margin-left: 10px;
+  border: none;
 }
 .btn-add{
   background: #0ba1ec!important;
