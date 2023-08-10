@@ -105,6 +105,7 @@ const EmployeeManager = () => {
 
   useEffect(() => {
     getAllEmployees();
+    
   }, []);
 
   const handleUpdate = async (e) => {
