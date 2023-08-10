@@ -19,7 +19,28 @@ const EmployeeManager = () => {
   const [updateAddress, setUpdateAddress] = useState();
   const [auth, setAuth] = useAuth();
   const [checkedItems, setCheckedItems] = useState({});
-
+  const [searchFirstName, setSearchFirstName] = useState('');
+  const [searchLastName, setSearchLastName] = useState('');
+ 
+  const handleInputChange = (e) => {
+    const inputValue = e.target.value;
+    const [firstName,...lastName] = inputValue.split(" ");
+    setSearchFirstName(firstName || "");
+    setSearchLastName(lastName.join(" ") || "");
+  };
+     //search
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axiosClient.get(`questions/employeeSearch?firstName=${searchFirstName}&lastName=${searchLastName}`);
+      console.log(response.payload);
+      if (response?.payload)
+      setEmployees(response?.payload); // Cập nhật state products với kết quả tìm kiếm
+    
+    } catch (error) {
+      console.log(error);
+    }
+  };
   //xử lý chọn vào checkbox lấy id
   const handleItemCheck = (event, employeeId) => {
     const isChecked = event.target.checked;
@@ -48,7 +69,7 @@ const EmployeeManager = () => {
   
     try {
       //await axiosClient.post(`admin/products/${selectedIds.join(',')}/delete`);
-      await axiosClient.post('admin/employees/delete', { selectedIds });
+      await axiosClient.post('admin/employees/delete', {selectedIds});
       setCheckedItems({});
       setEmployees(employees.filter((employee) => !selectedIds.includes(employee._id)));
       toast.success("Đã xóa sản phẩm");
@@ -203,6 +224,13 @@ const EmployeeManager = () => {
                     <i className="fas fa-trash-alt"></i> Xóa tất cả{" "}
                   </a>
                 </div>
+                <div className="col-sm-7">
+                  <form className="d-flex " role="search" onSubmit={handleSearch}>
+                    <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"   value={searchFirstName + " " + searchLastName}
+    onChange={handleInputChange} />
+                    <button className="btn btn-info" type="submit">Search</button>
+                  </form>
+                </div>
               </div>
               <table
                 className="table table-hover table-bordered js-copytextarea"
@@ -233,8 +261,8 @@ const EmployeeManager = () => {
                       e.role !== 1 ? (
                         <tr key={e._id}>
                           <td width="10">
-                            <input type="checkbox" name="check1" checked={checkedItems[e._id] || false}
-  onChange={(e) => handleItemCheck(e, e._id)}/>
+                            <input type="checkbox" checked={checkedItems[e._id] || false}
+  onChange={(event) => handleItemCheck(event, e._id)}/>
                           </td>
                           <td>{e._id}</td>
                           <td>
