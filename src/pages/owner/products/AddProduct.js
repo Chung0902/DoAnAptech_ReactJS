@@ -248,7 +248,7 @@ const AddProduct = () => {
                   {subphoto.map((subphoto, index) => (
                     <div key={index}>
                       <input
-                        className="form-control"
+                        className="form-control mb-2"
                         type="text"
                         value={subphoto}
                         onChange={(event) =>
@@ -257,7 +257,7 @@ const AddProduct = () => {
                       />
                     </div>
                   ))}
-                  <button type="button" onClick={handleAddSubphoto}>
+                  <button type="button" onClick={handleAddSubphoto} className="btn btn-primary">
                     Thêm hình ảnh
                   </button>
                 </div>
