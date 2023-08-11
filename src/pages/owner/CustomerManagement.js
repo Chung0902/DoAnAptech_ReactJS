@@ -2,10 +2,72 @@ import React, { useEffect, useState } from 'react'
 import UpdateCustomer from './customer/UpdateCustomer';
 import { NavLink } from 'react-router-dom';
 import axiosClient from '../../libraries/axiosClient';
+import { toast } from 'react-hot-toast';
 
 const CustomerManagement = () => {
 
   const [customers, setCustomer] = useState([]);
+  const [checkedItems, setCheckedItems] = useState({});
+  const [searchFirstName, setSearchFirstName] = useState('');
+  const [searchLastName, setSearchLastName] = useState('');
+
+  const handleInputChange = (e) => {
+    const inputValue = e.target.value;
+    const [firstName,...lastName] = inputValue.split(" ");
+    setSearchFirstName(firstName || "");
+    setSearchLastName(lastName.join(" ") || "");
+  };
+     //search
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axiosClient.get(`questions/customerSearch?firstName=${searchFirstName}&lastName=${searchLastName}`);
+      console.log(response.payload);
+      if (response?.payload)
+      setCustomer(response?.payload); // Cập nhật state products với kết quả tìm kiếm
+    
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+    //xử lý chọn vào checkbox lấy id
+    const handleItemCheck = (event, customerId) => {
+      const isChecked = event.target.checked;
+      setCheckedItems({
+        ...checkedItems,
+        [customerId]: isChecked,
+      });
+    };
+  
+    // xử lý nhấn chọn tất cả checkbox
+    const handleSelectAll = (event) => {
+      const isChecked = event.target.checked;
+      const newCheckedItems = {};
+    
+      customers.forEach((product) => {
+        newCheckedItems[product._id] = isChecked;
+      });
+    
+      setCheckedItems(newCheckedItems);
+    };
+    //click nút ẩn sẽ ẩn đi
+    const handleDeleteSelected = async () => {
+      const selectedIds = Object.keys(checkedItems).filter(
+        (itemId) => checkedItems[itemId]
+      );
+    
+      try {
+        //await axiosClient.post(`admin/products/${selectedIds.join(',')}/delete`);
+        await axiosClient.post('admin/customers/delete', {selectedIds});
+        setCheckedItems({});
+        setCustomer(customers.filter((customer) => !selectedIds.includes(customer._id)));
+        toast.success("Đã xóa sản phẩm");
+      } catch (error) {
+        console.error(error);
+        toast.error("Có lỗi xảy ra khi xóa sản phẩm");
+      }
+    };
 
   const getAllCustomer = async () => {
     try {
@@ -66,10 +128,17 @@ const CustomerManagement = () => {
                     className="btn btn-delete btn-sm"
                     type="button"
                     title="Xóa"
-                    onclick="myFunction(this)"
+                    onClick={handleDeleteSelected}
                   >
                     <i className="fas fa-trash-alt"></i> Xóa tất cả{" "}
                   </a>
+                </div>
+                <div className="col-sm-7">
+                  <form className="d-flex " role="search" onSubmit={handleSearch}>
+                    <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"   value={searchFirstName + " " + searchLastName}
+    onChange={handleInputChange} />
+                    <button className="btn btn-info" type="submit">Search</button>
+                  </form>
                 </div>
               </div>
               <table
@@ -82,7 +151,7 @@ const CustomerManagement = () => {
                 <thead>
                   <tr>
                     <th width="10">
-                      <input type="checkbox" id="all" />
+                      <input type="checkbox" id="all" onChange={handleSelectAll}/>
                     </th>
                     <th>ID khách hàng</th>
                     <th width="150">Họ và tên</th>
@@ -98,7 +167,8 @@ const CustomerManagement = () => {
                   {customers && customers.map((c) =>(
                     <tr key={c._id}>
                       <td width="10">
-                        <input type="checkbox" name="check1" value="1" />
+                        <input type="checkbox" checked={checkedItems[c._id] || false}
+  onChange={(event) => handleItemCheck(event, c._id)}/>
                       </td>
                       <td>{c._id}</td>
                       <td>{c.firstName} {c.lastName}</td>
