@@ -247,7 +247,6 @@ const EmployeeManager = () => {
                     </th>
                     <th>ID nhân viên</th>
                     <th width="150">Họ và tên</th>
-                    <th width="20">Ảnh thẻ</th>
                     <th width="300">Địa chỉ</th>
                     <th>Ngày sinh</th>
                     <th>Giới tính</th>
@@ -268,13 +267,6 @@ const EmployeeManager = () => {
                           <td>{e._id}</td>
                           <td>
                             {e.firstName} {e.lastName}
-                          </td>
-                          <td>
-                            <img
-                              className="img-card-person"
-                              src="/img-anhthe/1.jpg"
-                              alt=""
-                            />
                           </td>
                           <td>{e.address}</td>
                           <td>{formatDate(e.birthday)}</td>

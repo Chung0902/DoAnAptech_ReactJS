@@ -716,6 +716,30 @@ fieldset:disabled a.btn {
   font-weight: bold;
   color: red;
 }
+.btn-font {
+  height: 22px; 
+  width: 22px; 
+  margin-top: 10px; 
+  display: inline-flex; 
+  justify-content: center; 
+  align-items: center;
+  border-radius: 50%;
+  border: none; 
+  padding: 0; 
+  cursor: pointer;
+  background-color: #ccc; 
+  color: #333; 
+  transition: background-color 0.3s, color 0.3s; 
+}
+
+.btn-font:hover {
+  background-color: #333; 
+  color: #fff; 
+}
+.red-color {
+  color:red;
+  font-weight: bold;
+}
 
 
 

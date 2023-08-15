@@ -22,7 +22,7 @@ const UpdateEmployee = ({handleSubmit,firstName,lastName,phoneNumber,email,addre
               </div>
               <div className="row">
                 <div className="form-group col-md-6">
-                  <label className="control-label">ID nhân viên</label>
+                  <label className="control-label">Họ</label>
                   <input
                     className="form-control"
                     type="text"
@@ -33,7 +33,7 @@ const UpdateEmployee = ({handleSubmit,firstName,lastName,phoneNumber,email,addre
                   />
                 </div>
                 <div className="form-group col-md-6">
-                  <label className="control-label">Họ và tên</label>
+                  <label className="control-label">Tên</label>
                   <input
                     className="form-control"
                     type="text"
@@ -70,7 +70,7 @@ const UpdateEmployee = ({handleSubmit,firstName,lastName,phoneNumber,email,addre
                   <label htmlFor="exampleSelect1" className="control-label">
                     Chức vụ
                   </label>
-                  <select className="form-control" id="exampleSelect1"  onChange={handleRoleChange}>
+                  <select className="form-control" id="exampleSelect1" required onChange={handleRoleChange}>
                     <option>Bán hàng</option>
                     <option>Chủ shop</option>
                     <option>Shipper</option>
