@@ -168,41 +168,52 @@ const OrderManagement = () => {
                   </thead>
                   <tbody>
                     {listorders &&
-                      listorders.map((e) => (
-                        <React.Fragment key={e.order._id}>
-                          <tr>
-                            <td rowSpan={e.orderDetails.length + 1}>
-                              {e.order._id}
-                            </td>
-                            <td rowSpan={e.orderDetails.length + 1}>
-                              {e.order.customer.firstName}{" "}
-                              {e.order.customer.lastName}
-                            </td>
-                          </tr>
-                          {e.orderDetails.map((orderDetail, index) => (
-                            <tr key={index}>
-                              <td>{orderDetail.productName}</td>
-                              <td>{orderDetail.quantity}</td>
-                              {index === 0 && (
-                                <>
+                      listorders
+                        .filter(
+                          (e) => status === "" || e.order.status === status
+                        )
+                        .map((e) => (
+                          <React.Fragment key={e.order._id}>
+                            {/* Hiển thị thông tin khách hàng cho mỗi đơn hàng */}
+                            <tr>
+                              <td rowSpan={e.orderDetails.length + 1}>
+                                {e.order._id}
+                              </td>
+                              <td rowSpan={e.orderDetails.length + 1}>
+                                {e.order.customer.firstName}{" "}
+                                {e.order.customer.lastName}
+                              </td>
+                            </tr>
+                            {/* Hiển thị thông tin sản phẩm cho mỗi đơn hàng */}
+                            {e.orderDetails.map((orderDetail) => (
+                              <tr key={orderDetail.productId}>
+                                <td>{orderDetail.productName}</td>
+                                <td>{orderDetail.quantity}</td>
+                                {e.orderDetails.indexOf(orderDetail) === 0 && (
                                   <td
                                     className="totalor"
                                     rowSpan={e.orderDetails.length + 1}
                                   >
                                     {e.totalOrderPrice} đ
                                   </td>
+                                )}
+                                {e.orderDetails.indexOf(orderDetail) === 0 && (
                                   <td
                                     className="status_or"
                                     rowSpan={e.orderDetails.length + 1}
                                   >
                                     {e.order.paymentType}
                                   </td>
+                                )}
+                                {e.orderDetails.indexOf(orderDetail) === 0 && (
                                   <td
                                     className="status_or"
                                     rowSpan={e.orderDetails.length + 1}
                                   >
                                     {e.order.status}
                                   </td>
+                                )}
+                                {e.orderDetails.indexOf(orderDetail) === 0 && (
                                   <td rowSpan={e.orderDetails.length + 1}>
                                     <button
                                       className="btn btn-primary btn-sm edit btn-font"
@@ -252,12 +263,11 @@ const OrderManagement = () => {
                                       <i className="fa fa-check icon"></i>
                                     </button>
                                   </td>
-                                </>
-                              )}
-                            </tr>
-                          ))}
-                        </React.Fragment>
-                      ))}
+                                )}
+                              </tr>
+                            ))}
+                          </React.Fragment>
+                        ))}
                   </tbody>
                 </table>
               </div>
