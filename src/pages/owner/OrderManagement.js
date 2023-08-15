@@ -241,7 +241,7 @@ const OrderManagement = () => {
                                         e.order.status === "CANCELED"
                                       }
                                     >
-                                      <i className="fas fa-edit icon"></i>
+                                      <i className="fa fa-close red-color icon"></i>
                                     </button>
                                     <button
                                       className="btn btn-cancel btn-sm edit btn-font"
@@ -249,7 +249,7 @@ const OrderManagement = () => {
                                       title="Duyệt hoàn thành"
                                       disabled={e.order.status === "DELIVERING"}
                                     >
-                                      <i className="fas fa-edit icon"></i>
+                                      <i className="fa fa-check icon"></i>
                                     </button>
                                   </td>
                                 </>
