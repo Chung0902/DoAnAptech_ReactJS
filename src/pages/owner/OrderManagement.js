@@ -148,16 +148,6 @@ const OrderManagement = () => {
           <div className="tile">
             <div className="tile-body">
               <div className="row element-button">
-                <div className="col-sm-2">
-                  <a
-                    className="btn btn-delete btn-sm"
-                    type="button"
-                    title="Xóa"
-                    onClick={handleDeleteSelected}
-                  >
-                    <i className="fas fa-trash-alt"></i> Xóa tất cả{" "}
-                  </a>
-                </div>
               </div>
               <div className="tile-body">
                 <table
@@ -166,15 +156,13 @@ const OrderManagement = () => {
                 >
                   <thead>
                     <tr>
-                      <th width="10">
-                        <input type="checkbox" id="all" onChange={handleSelectAll}/>
-                      </th>
                       <th>ID đơn hàng</th>
                       <th>Khách hàng</th>
                       <th>Sản phẩm</th>
                       <th>Số lượng</th>
                       <th>Tổng tiền</th>
                       <th>Tổng cộng</th>
+                      <th>PTTT</th>
                       <th>
                         <select className="border-0 bg-secondary-subtle fw-semibold" value={status}
   onChange={(e) => setStatus(e.target.value)}>
@@ -193,10 +181,6 @@ const OrderManagement = () => {
                         <React.Fragment key={e.order._id}>
                           {/* Hiển thị thông tin khách hàng cho mỗi đơn hàng */}
                           <tr>
-                            <td rowSpan={e.orderDetails.length + 1}>
-                              <input type="checkbox"  checked={checkedItems[e.order._id] || false}
-  onChange={(event) => handleItemCheck(event,e.order._id)} />
-                            </td>
                             <td rowSpan={e.orderDetails.length + 1}>
                               {e.order._id}
                             </td>
@@ -218,6 +202,14 @@ const OrderManagement = () => {
                                 >
                                   {e.totalOrderPrice} đ
                                 </td>
+                              )}
+                              {e.orderDetails.indexOf(orderDetail) === 0 && (
+                              <td
+                                className="status_or"
+                                rowSpan={e.orderDetails.length + 1}
+                              >
+                                {e.order.paymentType}
+                              </td>
                               )}
                               {e.orderDetails.indexOf(orderDetail) === 0 && (
                                 <td
