@@ -160,7 +160,6 @@ const OrderManagement = () => {
                       <th>Khách hàng</th>
                       <th>Sản phẩm</th>
                       <th>Số lượng</th>
-                      <th>Tổng tiền</th>
                       <th>Tổng cộng</th>
                       <th>PTTT</th>
                       <th>
@@ -172,7 +171,7 @@ const OrderManagement = () => {
                           <option value="CANCELED">CANCELED</option>
                           <option value="DELIVERING">DELIVERING</option>
                         </select></th>
-                      <th>Tính năng</th>
+                      <th>Tính_năng</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -194,7 +193,6 @@ const OrderManagement = () => {
                             <tr key={orderDetail.productId}>
                               <td>{orderDetail.productName}</td>
                               <td>{orderDetail.quantity}</td>
-                              <td>{e.totalamountdiscount} đ</td>
                               {e.orderDetails.indexOf(orderDetail) === 0 && (
                                 <td
                                   className="totalor"
@@ -222,7 +220,7 @@ const OrderManagement = () => {
                               {e.orderDetails.indexOf(orderDetail) === 0 && (
                                 <td rowSpan={e.orderDetails.length + 1}>
                                   <button
-                                    className="btn btn-primary btn-sm edit "
+                                    className="btn btn-primary btn-sm edit btn-font"
                                     type="button"
                                     title="Duyệt"
                                     onClick={() =>
@@ -233,7 +231,7 @@ const OrderManagement = () => {
                                     <i className="fas fa-edit"></i>
                                   </button>
                                   <button
-                                    className="btn btn-cancel btn-sm edit "
+                                    className="btn btn-cancel btn-sm edit btn-font"
                                     type="button"
                                     title="Từ chối"
                                     onClick={() =>
@@ -241,7 +239,7 @@ const OrderManagement = () => {
                                     }
                                     disabled={e.order.status === 'COMPLETED' || e.order.status === 'CANCELED'}
                                   >
-                                    <i className="fas fa-edit"></i>
+                                    <i className="fas fa-edit icon"></i>
                                   </button>
                                 </td>
                               )}
