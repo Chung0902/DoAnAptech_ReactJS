@@ -54,7 +54,7 @@ const AddEmployee = () => {
     <main className="app-content">
         <div className="app-title">
             <ul className="app-breadcrumb breadcrumb ">
-                <li className="breadcrumb-item">Danh sách nhân viên</li>
+                <li className="breadcrumb-item" onClick={()=>navigate("/main/employeemanager")}>Danh sách nhân viên</li>
                 <li className="breadcrumb-item"><a href="#">Thêm nhân viên</a></li>
             </ul>
         </div>
@@ -99,17 +99,17 @@ const AddEmployee = () => {
               <div className="form-group col-md-4">
                 <label className="control-label">Ngày sinh</label>
                 <input className="form-control" type="date" value = {birthday}
-                    onChange={(e)=> setBirthday(e.target.value)}/>
+                    onChange={(e)=> setBirthday(e.target.value)} required/>
               </div> 
               <div className="form-group col-md-3">
                 <label className="control-label">Mật khẩu</label>
                 <input className="form-control" type="password" value = {password}
-                    onChange={(e)=> setPassword(e.target.value)}/>
+                    onChange={(e)=> setPassword(e.target.value)} required/>
               </div> 
               <div className="form-group col-md-3">
                 <label className="control-label">Sở thích</label>
                 <input className="form-control" type="text" value = {question}
-                    onChange={(e)=> setQuestion(e.target.value)}/>
+                    onChange={(e)=> setQuestion(e.target.value)} required/>
               </div> 
               <div className="form-group col-md-3">
                 <label className="control-label">Giới tính</label>
@@ -121,7 +121,7 @@ const AddEmployee = () => {
               </div> 
               <div className="form-group  col-md-3">
                 <label for="exampleSelect1" className="control-label">Chức vụ</label>
-                <select className="form-control" id="exampleSelect1" onChange={handleRoleChange}>
+                <select className="form-control" id="exampleSelect1" required onChange={handleRoleChange}>
                   <option>-- Chọn chức vụ --</option>
                   <option>Bán hàng</option>
                   <option>Shipper</option>
@@ -129,12 +129,12 @@ const AddEmployee = () => {
                 </select>
               </div>
 
-              <div className="form-group col-md-12">
+              {/* <div className="form-group col-md-12">
                 <label className="control-label">Ảnh 3x4 nhân viên</label>
                 <div id="myfileupload">
                   <input type="file" id="uploadfile" name="ImageUpload" onchange="readURL(this);" />
                 </div>
-              </div>
+              </div> */}
               <button className="btn btn-info" type="submit" >Lưu lại</button>
               <button className="btn btn-danger" type="button">Hủy bỏ</button>
             </form>

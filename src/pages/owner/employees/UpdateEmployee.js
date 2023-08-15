@@ -70,7 +70,7 @@ const UpdateEmployee = ({handleSubmit,firstName,lastName,phoneNumber,email,addre
                   <label htmlFor="exampleSelect1" className="control-label">
                     Chức vụ
                   </label>
-                  <select className="form-control" id="exampleSelect1"  onChange={handleRoleChange}>
+                  <select className="form-control" id="exampleSelect1" required onChange={handleRoleChange}>
                     <option>Bán hàng</option>
                     <option>Chủ shop</option>
                     <option>Shipper</option>

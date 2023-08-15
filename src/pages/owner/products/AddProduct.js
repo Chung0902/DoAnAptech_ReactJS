@@ -92,7 +92,7 @@ const AddProduct = () => {
     <main className="app-content">
       <div className="app-title">
         <ul className="app-breadcrumb breadcrumb">
-          <li className="breadcrumb-item">Danh sách sản phẩm</li>
+          <li className="breadcrumb-item" onClick={()=>navigate('/main/productsmanager')}>Danh sách sản phẩm</li>
           <li className="breadcrumb-item">
             <a href="#">Thêm sản phẩm</a>
           </li>
@@ -104,7 +104,7 @@ const AddProduct = () => {
             <h3 className="tile-title">Tạo mới sản phẩm</h3>
             <div className="tile-body">
               <div className="row element-button">
-                <div className="col-sm-3">
+                {/* <div className="col-sm-3">
                   <button
                     type="button"
                     className="btn btn-add btn-sm"
@@ -115,8 +115,8 @@ const AddProduct = () => {
                     <i className="fas fa-folder-plus"></i> Thêm nhà cung cấp
                   </button>
                   <AddSuppliers />
-                </div>
-                <div className="col-sm-3">
+                </div> */}
+                {/* <div className="col-sm-3">
                   <button
                     type="button"
                     className="btn btn-add btn-sm"
@@ -137,7 +137,7 @@ const AddProduct = () => {
                     <i className="fas fa-folder-plus"></i> Thêm trạng thái
                   </button>
                   <AddStatus />
-                </div>
+                </div> */}
               </div>
               <form className="row" onSubmit={handleSubmit}>
                 <div className="form-group col-md-3">
@@ -264,8 +264,8 @@ const AddProduct = () => {
                 <button className="btn btn-info" type="submit">
                   Lưu lại
                 </button>
-                <a className="btn btn-danger" href="table-data-product.html">
-                  Hủy bỏ
+                <a className="btn btn-danger" onClick={()=>navigate('/main/productsmanager')}>
+                  Trở về
                 </a>
               </form>
             </div>

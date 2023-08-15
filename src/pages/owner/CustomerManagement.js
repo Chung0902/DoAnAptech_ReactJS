@@ -155,12 +155,12 @@ const CustomerManagement = () => {
                     </th>
                     <th>ID khách hàng</th>
                     <th width="150">Họ và tên</th>
-                    <th width="20">Ảnh đại diện</th>
+                    {/* <th width="20">Ảnh đại diện</th> */}
                     <th width="300">Địa chỉ</th>
                     <th>Ngày sinh</th>
                     <th>Giới tính</th>
                     <th>SĐT</th>
-                    <th width="100">Tính năng</th>
+                    {/* <th width="100">Tính năng</th> */}
                   </tr>
                 </thead>
                 <tbody>
@@ -172,19 +172,21 @@ const CustomerManagement = () => {
                       </td>
                       <td>{c._id}</td>
                       <td>{c.firstName} {c.lastName}</td>
-                      <td>
+                      {/* <td>
                         <img
                           className="img-card-person"
-                          src="/img-anhthe/1.jpg"
+                          src={`http://localhost:3333/${c.avatarUrl}`}
                           alt=""
+                          width="100px;"
+                          height={"100px"}
                         />
-                      </td>
+                      </td> */}
                       <td>{c.address}</td>
                       <td>{formatDate(c.birthday)}</td>
                       <td>Nữ</td>
                       <td>{c.phoneNumber}</td>
                     
-                      <td className="table-td-center">
+                      {/* <td className="table-td-center">
                         <button
                           className="btn btn-primary btn-sm trash"
                           type="button"
@@ -204,7 +206,7 @@ const CustomerManagement = () => {
                           </button>
                           <UpdateCustomer/>
                   
-                      </td>
+                      </td> */}
                     </tr>
                     ))}
                   

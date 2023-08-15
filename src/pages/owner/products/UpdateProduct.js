@@ -143,9 +143,13 @@ const UpdateProduct = ({handleSubmit,name,description,price,stock,photo,discount
             <button className="btn btn-save" type="submit">
               Lưu lại
             </button>
-            <a className="btn btn-cancel" data-dismiss="modal" href="#">
+            <button 
+               type="button"
+               className="btn btn-secondary"
+               data-bs-dismiss="modal"
+            >
               Hủy bỏ
-            </a>
+            </button>
           </form>
           <div className="modal-footer"></div>
         </div>
