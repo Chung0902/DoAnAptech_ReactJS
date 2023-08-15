@@ -11,6 +11,7 @@ const ChatOnline = () => {
   const [selectedRoom, setSelectedRoom] = useState(null);
   const [roomList, setRoomList] = useState([]);
   const [messages, setMessages] = useState([]);
+  const [loadCustomer, setLoadCustomer] = useState([]);
   const [messageInput, setMessageInput] = useState("");
   const [customerDataArray, setCustomerDataArray] = useState([]);
   const adminSocket = io("http://localhost:3333");
@@ -25,7 +26,18 @@ const ChatOnline = () => {
     return () => {
       adminSocket.off('roomList');
     };
-  }, [messages]);
+  }, [loadCustomer]);
+
+  useEffect(() => {
+    const handleReceiveMessage = ({ roomId }) => {
+      setLoadCustomer(prevMessages => [...prevMessages, { roomId }]);
+    };
+    adminSocket.on("update", handleReceiveMessage);
+    return () => {
+      adminSocket.off("update", handleReceiveMessage);
+    };
+  }, [adminSocket]);
+
 
   useEffect(() => {
     if (selectedRoom) {
@@ -152,8 +164,8 @@ const ChatOnline = () => {
             const customerData = customerDataArray[index];
             if (customerData) {
               return (
-                <li key={roomId} className="contact">
-                  <div onClick={() => handleRoomSelect(roomId, customerData)} className="wrap">
+                <li key={roomId} onClick={() => handleRoomSelect(roomId, customerData)} className="contact">
+                  <div className="wrap">
                     <span className="contact-status online" />
                     <img
                       src={`http://localhost:3333/${customerData.avatarUrl}`}
