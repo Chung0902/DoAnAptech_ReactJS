@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { BsFillChatDotsFill } from "react-icons/bs";
 
 const Header = () => {
   return (
@@ -58,6 +59,12 @@ const Header = () => {
             <NavLink to="/main/ordermanagement" className="active1">
               <span className="fa-solid fa-truck-field-un" />
               <span>Oders</span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/main/chat" className="active1">
+              <span><BsFillChatDotsFill/></span>
+              <span>Chat</span>
             </NavLink>
           </li>
         </ul>

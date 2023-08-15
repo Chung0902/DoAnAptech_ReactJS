@@ -17,6 +17,7 @@ import AddProduct from "./pages/owner/products/AddProduct";
 import OrderManagement from "./pages/owner/OrderManagement";
 import RevenueManagement from "./pages/owner/RevenueManagement";
 import ProfileManager from "./pages/employee/ProfileManager";
+import ChatOnline from "./pages/owner/ChatOnline/index"
 
 
 function App() {
@@ -35,6 +36,8 @@ function App() {
           <Route path="/main/productsmanager/addproducts" element={<AddProduct/>} />
           <Route path="/main/ordermanagement" element={<OrderManagement/>} />
           <Route path="/main/revenuemanagement" element={<RevenueManagement/>} />
+          <Route path="/main/chat" element={<ChatOnline/>} />
+
 
           <Route path="/main/employeedashboard" element={<MainDashboardAdmin/>} />
           <Route path="/main/profilemanager" element={<ProfileManager/>} />

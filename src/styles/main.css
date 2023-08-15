@@ -244,8 +244,6 @@ th {
 }
 
 
-
-
 .app-title {
   display: block;
   display: -ms-flexbox;
@@ -268,6 +266,7 @@ th {
   border-left: 6px solid #FFD43B;
   margin-bottom: 20px;
 }
+
 
 @media print {
   .app-title {
