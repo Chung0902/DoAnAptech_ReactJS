@@ -136,7 +136,7 @@ const AddEmployee = () => {
                 </div>
               </div> */}
               <button className="btn btn-info" type="submit" >Lưu lại</button>
-              <button className="btn btn-danger" type="button">Hủy bỏ</button>
+              <button className="btn btn-danger" type="button" onClick={()=>navigate("/main/employeemanager")}>Trở về</button>
             </form>
 
              
