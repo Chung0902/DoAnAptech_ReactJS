@@ -96,6 +96,7 @@ const handleUpdate = async (e) =>{
                 placeholder="Nhập danh mục mới"
                 value = {name}
                 onChange={(e)=> setName(e.target.value)} 
+                required
               />
             </div>
             <div className="mb-3">
@@ -105,6 +106,7 @@ const handleUpdate = async (e) =>{
                 placeholder="image"
                 value = {photo}
                 onChange={(e)=> setPhoto(e.target.value)} 
+                required
               />
             </div>
             <button type="submit" className="btn btn-primary btn-submit">
