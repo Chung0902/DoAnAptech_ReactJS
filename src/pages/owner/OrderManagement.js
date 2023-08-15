@@ -76,6 +76,36 @@ const OrderManagement = () => {
     }
   };
 
+  const updateComplete = async (orderId, employeeId, paymentType, customerId) => {
+    try {
+      const response = await axiosClient.patch(`admin/orders/${orderId}`, {
+        status: "COMPLETED",
+        employeeId,
+        paymentType,
+        customerId,
+      });
+      setListorders((prevList) =>
+        prevList.map((order) => {
+          if (order.order._id === orderId) {
+            return {
+              ...order,
+              order: {
+                ...order.order,
+                status: "COMPLETED",
+                employeeId,
+                paymentType,
+                customerId,
+              },
+            };
+          }
+          return order;
+        })
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const updateOrder = async (orderId, employeeId, paymentType, customerId) => {
     try {
       const response = await axiosClient.patch(`admin/orders/${orderId}`, {
@@ -258,7 +288,15 @@ const OrderManagement = () => {
                                       className="btn btn-cancel btn-sm edit btn-font"
                                       type="button"
                                       title="Duyệt hoàn thành"
-                                      disabled={e.order.status === "DELIVERING"}
+                                      onClick={() =>
+                                        updateComplete(
+                                          e.order._id,
+                                          auth.user._id,
+                                          e.order.paymentType,
+                                          e.order.customer._id
+                                        )
+                                      }
+                                      disabled={e.order.status !== "DELIVERING"}
                                     >
                                       <i className="fa fa-check icon"></i>
                                     </button>
