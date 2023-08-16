@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import {useNavigate, useLocation} from 'react-router-dom';
+import { useNavigate, useLocation } from "react-router-dom";
 
 // import toast from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import {
   CButton,
   CCard,
@@ -22,48 +22,49 @@ import "../../styles/buttonlogin.css";
 import axiosClient from "../../libraries/axiosClient";
 import { useAuth } from "../../context/auth";
 
-
-
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [auth, setAuth] = useAuth();
-  const navigate = useNavigate("")
-  const location = useLocation()
+  const navigate = useNavigate("");
+  const location = useLocation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axiosClient.post('admin/employees/login', {
+      const response = await axiosClient.post("admin/employees/login", {
         email,
         password,
       });
       if (response.token && response.refreshToken) {
         // window.localStorage.setItem('TOKEN', response.token);
         // window.localStorage.setItem('REFRESH_TOKEN', response.refreshToken);
-        
-          // Set user info and token in AuthContext
-          setAuth({
+
+        // Set user info and token in AuthContext
+        setAuth({
+          user: response.user,
+          token: response.token,
+        });
+
+        // Save user info and token in localStorage
+        localStorage.setItem(
+          "auth",
+          JSON.stringify({
             user: response.user,
             token: response.token,
-          });
-  
-          // Save user info and token in localStorage
-          localStorage.setItem('auth', JSON.stringify({
-            user: response.user,
-            token: response.token,
-          }));
-          alert('login success!')
-        navigate(location.state?.from ||'/main');
+          })
+        );
+        alert("login success!");
+        navigate(location.state?.from || "/main");
       }
     } catch (error) {
       console.error(error);
-      alert('Something went wrong');
+      alert("Something went wrong");
     }
   };
 
   return (
-  <div className="bg-login min-vh-100 d-flex flex-row align-items-center">
+    <div className="bg-login min-vh-100 d-flex flex-row align-items-center">
       <CContainer>
         <CRow className="justify-content-center ">
           <CCol md={8}>
@@ -81,9 +82,10 @@ const Login = () => {
                       </CInputGroupText>
                       <CFormInput
                         value={email}
-                        onChange={(e) => setEmail(e.target.value)} 
-                        placeholder="Email" 
-                        autoComplete="email" />
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="Email"
+                        autoComplete="email"
+                      />
                     </CInputGroup>
                     <CInputGroup className="mb-4">
                       <CInputGroupText>
@@ -99,7 +101,9 @@ const Login = () => {
                     </CInputGroup>
                     <CRow>
                       <CCol xs={6}>
-                        <CButton type="submit" className="px-4 buttonlg">Login</CButton>
+                        <CButton type="submit" className="px-4 buttonlg">
+                          Login
+                        </CButton>
                       </CCol>
                       <CCol xs={6} className="text-right">
                         <Link to="/forgot-password">
@@ -118,14 +122,14 @@ const Login = () => {
               >
                 <CCardBody className="text-center">
                   <div>
-                    <h2>Sign up</h2>
+                    <h2>Cosmestic</h2>
                     <p>
                       When logging into the system of a website or application,
                       the user will need to provide login information to
                       authenticate his/her identity and access the system's
                       features and services.
                     </p>
-                    <Link to="/register">
+                    {/* <Link to="/register">
                       <CButton
                         color="primary"
                         className="mt-3 "
@@ -134,7 +138,7 @@ const Login = () => {
                       >
                         Register Now!
                       </CButton>
-                    </Link>
+                    </Link> */}
                   </div>
                 </CCardBody>
               </CCard>

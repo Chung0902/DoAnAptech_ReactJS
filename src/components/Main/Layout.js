@@ -1,9 +1,9 @@
 import React from "react";
 
-import { Outlet,Link, } from 'react-router-dom';
+import { Outlet, Link } from "react-router-dom";
 
 import "../../styles/header.css";
-import Header from './../owner/Header/index';
+import Header from "./../owner/Header/index";
 import HeaderEm from "../employee/HeaderEm";
 import { useAuth } from "../../context/auth";
 
@@ -17,16 +17,18 @@ const Layout = () => {
       token: "",
     });
     localStorage.removeItem("auth");
-    
   };
   return (
     <>
       <div>
         <input type="checkbox" id="nav-toggle" />
         <div className="slidebar">
-        {auth && auth.user && auth.user.role === 1 ? <Header /> : <HeaderEm/>}
+          {auth && auth.user && auth.user.role === 1 ? (
+            <Header />
+          ) : (
+            <HeaderEm />
+          )}
           {/* <Header /> */}
-          
         </div>
         <div className="main-content">
           <header>
@@ -39,24 +41,42 @@ const Layout = () => {
             </h4>
             <div className="user-wrapper">
               <div className="btn-group">
-                <button type="button" className="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                <button
+                  type="button"
+                  className="btn btn-info dropdown-toggle"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
                   {auth?.user?.firstName} {auth?.user?.lastName}
                 </button>
                 <ul className="dropdown-menu">
-                  <li><Link className="dropdown-item" to="#">Profile</Link></li>
-                  <li><Link className="dropdown-item" to="#">Another action</Link></li>
-                  <li><hr className="dropdown-divider" /></li>
-                  <li><Link className="dropdown-item" onClick={handleLogout} to="/login">Logout</Link></li>
+                  <li>
+                    <Link className="dropdown-item" to="/main/profilemanager">
+                      Profile
+                    </Link>
+                  </li>
+                  {/* <li><Link className="dropdown-item" to="#">Another action</Link></li> */}
+                  <li>
+                    <hr className="dropdown-divider" />
+                  </li>
+                  <li>
+                    <Link
+                      className="dropdown-item"
+                      onClick={handleLogout}
+                      to="/login"
+                    >
+                      Logout
+                    </Link>
+                  </li>
                 </ul>
               </div>
             </div>
           </header>
           <main>
-            <Outlet/>
+            <Outlet />
           </main>
         </div>
       </div>
-
     </>
   );
 };

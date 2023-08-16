@@ -14,7 +14,7 @@ const ChatOnline = () => {
   const [loadCustomer, setLoadCustomer] = useState([]);
   const [messageInput, setMessageInput] = useState("");
   const [customerDataArray, setCustomerDataArray] = useState([]);
-  const adminSocket = io("http://localhost:3333");
+  const adminSocket = io("https://do-an-aptech-nodejs.onrender.com");
   const [selectedCustomer, setSelectedCustomer] = useState(null);
 
   useEffect(() => {
