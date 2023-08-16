@@ -168,7 +168,7 @@ const ChatOnline = () => {
                   <div className="wrap">
                     <span className="contact-status online" />
                     <img
-                      src={`http://localhost:3333/${customerData.avatarUrl}`}
+                      src={`https://do-an-aptech-nodejs.onrender.com/${customerData.avatarUrl}`}
                       alt=""
                     />
                     <div className="meta">
@@ -198,7 +198,7 @@ const ChatOnline = () => {
           <div className="contact-profile">
           {selectedCustomer && (   
             <>
-            <img src={`http://localhost:3333/${selectedCustomer.avatarUrl}`} alt="" />
+            <img src={`https://do-an-aptech-nodejs.onrender.com/${selectedCustomer.avatarUrl}`} alt="" />
             <p>{selectedCustomer.firstName} {selectedCustomer.lastName}</p> 
             </>
              )}
@@ -226,7 +226,7 @@ const ChatOnline = () => {
                     <>
                     {selectedCustomer && (
                     <img
-                    src={`http://localhost:3333/${selectedCustomer.avatarUrl}`}
+                    src={`https://do-an-aptech-nodejs.onrender.com/${selectedCustomer.avatarUrl}`}
                     alt=""
                     />
                     )}
