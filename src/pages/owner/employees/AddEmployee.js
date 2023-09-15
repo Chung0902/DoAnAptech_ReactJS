@@ -95,7 +95,7 @@ const AddEmployee = () => {
                 <label className="control-label">Số điện thoại</label>
                 <input className="form-control" type="number" required value = {phoneNumber}
                     onChange={(e)=> setPhoneNumber(e.target.value)}/>
-              </div>
+              </div>git
               <div className="form-group col-md-4">
                 <label className="control-label">Ngày sinh</label>
                 <input className="form-control" type="date" value = {birthday}
