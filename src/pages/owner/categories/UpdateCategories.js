@@ -23,11 +23,11 @@ const UpdateCategories = ({handleSubmit,value,setValue,setVisible}) => {
             </div>
             <div className="form-group col-md-12">
               <label className="control-label">Nhập tên danh mục sản phẩm</label>
-              <input className="form-control" type="text" required placeholder='Sửa rửa mặt' value = {value}
+              <input className="form-control" type="text" required value = {value}
                     onChange={(e)=> setValue(e.target.value)}/>
             </div>
           </div>
-          <button className="btn btn-save" type="submit">
+          <button data-bs-dismiss="modal"  className="btn btn-save" type="submit">
             Lưu lại
           </button>
           <button

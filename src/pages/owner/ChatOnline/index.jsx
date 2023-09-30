@@ -38,19 +38,30 @@ const ChatOnline = () => {
     };
   }, [adminSocket]);
 
-
+  
   useEffect(() => {
     if (selectedRoom) {
       adminSocket.emit("joinRoom", { roomId: selectedRoom });
     }
   }, [selectedRoom]);
 
+  
+  useEffect(() => {
+    adminSocket.on('messageHistory', history => {
+      setMessages(prevMessages => ({
+        ...prevMessages,
+        [selectedRoom]: history
+      }));
+    });
+  }, [adminSocket]);
+
+
   useEffect(() => {
     const handleReceiveMessage = ({ content, roomId }) => {
       if (selectedRoom && roomId === selectedRoom) {
         setMessages(prevMessages => ({
           ...prevMessages,
-          [roomId]: [...(prevMessages[roomId] || []), content]
+          [roomId]: [...(prevMessages[roomId] || []), { content }]
         }));
       }
     };
@@ -214,10 +225,10 @@ const ChatOnline = () => {
                 <li
                   key={index}
                   className={`${
-                    message.senderId === "admin" ? "replies" : "sent"
+                    message.content.senderId === "admin" ? "replies" : "sent"
                   }`}
                 >
-                  { message.senderId === "admin" ? (
+                  { message.content.senderId === "admin" ? (
                   <img
                     src="http://emilcarlsson.se/assets/mikeross.png"
                     alt=""
@@ -232,7 +243,7 @@ const ChatOnline = () => {
                     )}
                     </>
                    )}
-                  <p>{message.content}</p>
+                  <p>{message.content.content}</p>
                 </li>
               ))}
             </ul>

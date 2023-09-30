@@ -261,8 +261,7 @@ const EmployeeManager = () => {
                       e.role !== 1 ? (
                         <tr key={e._id}>
                           <td width="10">
-                            <input type="checkbox" checked={checkedItems[e._id] || false}
-  onChange={(event) => handleItemCheck(event, e._id)}/>
+                            <input type="checkbox" checked={checkedItems[e._id] || false} onChange={(event) => handleItemCheck(event, e._id)}/>
                           </td>
                           <td>{e._id}</td>
                           <td>

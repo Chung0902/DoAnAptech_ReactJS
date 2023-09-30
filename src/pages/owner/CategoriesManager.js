@@ -18,8 +18,9 @@ const CategoriesManager = () => {
       if (response?.payload) {
         toast.success(response.message);
         console.log(response.message)
-        setName();
-        setPhoto();
+        alert("Thêm mới thành công");
+        setName("");
+        setPhoto("");
         setCategories([...categories, response.payload]); // Thêm danh mục mới vào danh sách
       } 
     } catch (error) {
@@ -57,6 +58,7 @@ const handleUpdate = async (e) =>{
           setSelected(null);
           setUpdateName("");
           setCategories(categories.map((category) => {
+          setVisible(false);
             if (category._id === selected._id) {
               return { ...category, name: updateName }; // Cập nhật tên của danh mục tương ứng
             }
@@ -142,7 +144,6 @@ const handleUpdate = async (e) =>{
                   >
                     Edit
                   </button><UpdateCategories setVisible={setVisible} value={updateName}  setValue={setUpdateName} handleSubmit={handleUpdate} />
-                  {/* <button className="btn btn-primary ms-2">Edit</button> */}
                   <button className="btn btn-delete btn-dele" 
                   onClick={() => { handleDelete(c._id)}}>Delete</button>
                 </td>

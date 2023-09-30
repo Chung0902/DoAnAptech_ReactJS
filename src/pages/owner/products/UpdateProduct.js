@@ -140,7 +140,7 @@ const UpdateProduct = ({handleSubmit,name,description,price,stock,photo,discount
                 </div>
             </div>
 
-            <button className="btn btn-save" type="submit">
+            <button className="btn btn-save"  data-bs-dismiss="modal" type="submit">
               Lưu lại
             </button>
             <button 

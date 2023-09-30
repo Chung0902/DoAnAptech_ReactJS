@@ -86,7 +86,7 @@ const UpdateEmployee = ({handleSubmit,firstName,lastName,phoneNumber,email,addre
               >
                 Hủy
               </button>
-              <button type="submit" className="btn btn-primary">
+              <button type="submit"  data-bs-dismiss="modal" className="btn btn-primary">
                 Cập nhật
               </button>
             </div>
