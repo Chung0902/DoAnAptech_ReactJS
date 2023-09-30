@@ -158,7 +158,6 @@ const CustomerManagement = () => {
                     {/* <th width="20">Ảnh đại diện</th> */}
                     <th width="300">Địa chỉ</th>
                     <th>Ngày sinh</th>
-                    <th>Giới tính</th>
                     <th>SĐT</th>
                     {/* <th width="100">Tính năng</th> */}
                   </tr>
@@ -183,7 +182,6 @@ const CustomerManagement = () => {
                       </td> */}
                       <td>{c.address}</td>
                       <td>{formatDate(c.birthday)}</td>
-                      <td>Nữ</td>
                       <td>{c.phoneNumber}</td>
                     
                       {/* <td className="table-td-center">

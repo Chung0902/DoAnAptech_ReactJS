@@ -9,12 +9,13 @@ import axiosClient from "../../../libraries/axiosClient";
 const ChatOnline = () => {
   const [auth] = useAuth();
   const [selectedRoom, setSelectedRoom] = useState(null);
+  const [roomId, setRoomId] = useState(null);
   const [roomList, setRoomList] = useState([]);
   const [messages, setMessages] = useState([]);
   const [loadCustomer, setLoadCustomer] = useState([]);
   const [messageInput, setMessageInput] = useState("");
   const [customerDataArray, setCustomerDataArray] = useState([]);
-  const adminSocket = io("http://localhost:3333");
+  const adminSocket = io("https://do-an-aptech-nodejs.onrender.com");
   const [selectedCustomer, setSelectedCustomer] = useState(null);
 
   useEffect(() => {
@@ -58,6 +59,7 @@ const ChatOnline = () => {
 
   useEffect(() => {
     const handleReceiveMessage = ({ content, roomId }) => {
+      setRoomId(roomId);
       if (selectedRoom && roomId === selectedRoom) {
         setMessages(prevMessages => ({
           ...prevMessages,
@@ -179,7 +181,7 @@ const ChatOnline = () => {
                   <div className="wrap">
                     <span className="contact-status online" />
                     <img
-                      src={`http://localhost:3333/${customerData.avatarUrl}`}
+                      src={`https://do-an-aptech-nodejs.onrender.com/${customerData.avatarUrl}`}
                       alt=""
                     />
                     <div className="meta">
@@ -209,7 +211,7 @@ const ChatOnline = () => {
           <div className="contact-profile">
           {selectedCustomer && (   
             <>
-            <img src={`http://localhost:3333/${selectedCustomer.avatarUrl}`} alt="" />
+            <img src={`https://do-an-aptech-nodejs.onrender.com/${selectedCustomer.avatarUrl}`} alt="" />
             <p>{selectedCustomer.firstName} {selectedCustomer.lastName}</p> 
             </>
              )}
@@ -237,7 +239,7 @@ const ChatOnline = () => {
                     <>
                     {selectedCustomer && (
                     <img
-                    src={`http://localhost:3333/${selectedCustomer.avatarUrl}`}
+                    src={`https://do-an-aptech-nodejs.onrender.com/${selectedCustomer.avatarUrl}`}
                     alt=""
                     />
                     )}
